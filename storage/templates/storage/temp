@@ -1,0 +1,479 @@
+
+<form action=""
+      method="POST"
+      role="form"
+      class="form-horizontal">
+
+    {% csrf_token %}
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <h3>CHANGE ITEM</h3>
+            <br>
+
+
+            {{item.image.url}}
+            {% if item.image.url %}
+            <img src="{{ item.image.url }}"
+                 alt=""
+                 class="img-thumbnail">
+            {% else %}
+            {% endif %}
+
+            {% for field in form %}
+            <div class="col-xs-7">
+                <div class="form-group"
+                     style="margin-left: 20px">
+                    <label for="id_{{ field.lable_tag }}">{{ field.label_tag }}</label>
+
+
+
+                    {% if field.field.widget.input_type == 'file' %}
+                    <img src="{{ item.image.url }}"
+                         alt=""
+                         class="img-thumbnail">
+                    {% else %}
+                    {% render_field field class="form-control" %}
+                    {% endif %}
+
+                    <span class="help-block"> {{ field.help_text }} </span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="row thumbnail thumbnail-sm"
+             style="padding:10px; background: #eee">
+            <div class="col-xs-6 col-md-6">
+                <button type="button"
+                        class="btn btn-danger"
+                        onclick="location.href='{{ item.get_delete_url }}'">DELETE</button>
+            </div>
+            <div class="col-xs-6 col-md-6 text-right">
+                <button type="submit"
+                        class="btn btn-primary">SAVE</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+--------------
+
+<div class="form-group">
+    {% if form.is_bound %}
+    {% if field.errors %}
+    <!--
+    There is the error field
+    -->
+    <div class="has-error has-feedback">
+        <label class="control-label"
+               for="{{ field.id_for_label }}"> {{ field.label_tag }} </label>
+        {% render_field field class="form-control" %}
+        <!--
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        -->
+    </div>
+    {% for error in field.errors %}
+    <small class="text-danger">
+        {{ error }}
+    </small>
+    {% endfor %}
+    {% else %}
+    <!--
+    There is no error field
+    -->
+    <label class="control-label"
+           for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+    {% render_field field class="form-control is-valid" %}
+    {% endif %}
+
+    {% else %}
+
+
+    {% if field.label == "Image" %}
+
+    {% if item.image %}
+
+
+
+    <div class="thumbnail text-center">
+        <img src="{{ item.image.url }}"
+             alt=""
+             height="100px">
+    </div>
+
+    {% else %}
+
+    {% endif %}
+
+
+
+
+
+
+
+
+    {% else %}
+    {% endif %}
+    <label class="control-label"
+           for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+    {% render_field field class="form-control" placeholder=field.help_text%}
+
+
+    {% endif %}
+
+    {% if field.help_text %}
+    <!--do something-->
+    <!--
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+            -->
+    {% endif %}
+</div>
+
+
+
+
+
+<nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button"
+                        class="navbar-toggle"
+                        data-toggle="collapse"
+                        data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand"
+                   href="#">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse"
+                 id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{% url 'storage_index' %}">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#"
+                           class="dropdown-toggle"
+                           data-toggle="dropdown"> Staff <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'categories' %}">Categories</a></li>
+                            <li><a href="{% url 'items' %}">Items</a></li>
+                            <li><a href="{% url 'itemactions' %}">Item Actions</a></li>
+                            <!--
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">One more separated link</a></li>
+                                -->
+                        </ul>
+                    </li>
+
+
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------
+<form action=""
+      method="POST">
+
+
+    {% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+    {% endfor %}
+
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger"
+         role="alert">
+        {% for error in form.non_field_errors %}
+        {{ error }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% for field in form.visible_fields %}
+    <div class="form-group">
+        {{ field.label_tag }}
+
+        {% if form.is_bound %}
+
+        {% if field.errors %}
+        {% render_field field class="form-control is-invalid" %}
+        {% for error in field.errors %}
+        <div class="invalid-feedback">
+            {{ error }}
+        </div>
+        {% endfor %}
+        {% else %}
+        {% render_field field class="form-control is-valid" %}
+        {% endif %}
+
+        {% else %}
+        {% render_field field class="form-control" %}
+        {% endif %}
+
+        {% if field.help_text %}
+        <small class="form-text text-muted">{{ field.help_text }}</small>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+
+    <div class="card bg-light mt-5">
+        <div class="card-body">
+            <button type="button"
+                    class="btn btn-danger"
+                    onclick="location.href='{{ category.get_delete_url }}'">DELETE</button>
+            <button type="submit"
+                    class="btn btn-primary float-right">SAVE</button>
+        </div>
+    </div>
+
+</form>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+<form action=""
+      method="POST">
+    {% csrf_token %}
+
+    {% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+    {% endfor %}
+
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger"
+         role="alert">
+        {% for error in form.non_field_errors %}
+        {{ error }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% for field in form.visible_fields %}
+
+    {{field.errors}}
+
+    <div class="form-group">
+        <label for="{{field.id_for_field}}">
+            {{field.label_tag}}
+        </label>
+        {% render_field field class="form-control" placeholder=field.help_text %}
+    </div>
+    {% endfor %}
+
+
+
+    <div class="card bg-light mt-5">
+        <div class="card-body">
+            <button type="button"
+                    class="btn btn-danger"
+                    onclick="location.href='{{ category.get_delete_url }}'">DELETE</button>
+            <button type="submit"
+                    class="btn btn-primary float-right">SAVE</button>
+        </div>
+    </div>
+
+
+</form>
+
+
+
+
+
+
+
+<form action=""
+      method="POST"
+      role="form"
+      class="form-horizontal">
+
+    {% csrf_token %}
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <h3>CHANGE CATEGORY</h3>
+            <br>
+            {% for field in form %}
+            <div class="col-xs-7">
+                <div class="form-group"
+                     style="margin-left: 20px">
+                    <label for="id_{{ field.lable_tag }}">{{ field.label_tag }}</label>
+                    {% render_field field class="form-control" %}
+                    <span class="help-block"> {{ field.help_text }} </span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button"
+                                class="btn btn-danger"
+                                onclick="location.href='{{ category.get_delete_url }}'">DELETE</button>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button type="submit"
+                                class="btn btn-primary">SAVE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+
+
+<form action="{% url 'category_delete' pk=category.pk %}" method="POST">
+                    {% csrf_token %}
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                            <h4 class="modal-title">Delete Category</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        Are you sure you want to delete the category: {{ form.name.value }}
+                    </div>
+                
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <!--
+                        <a href="{% url 'category_delete' pk=category.pk %}">action1</a>
+                        <a href="{{ category.get_delete_url }}">action2</a>
+                        -->
+                        
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">  No  </button>
+                        <button type="submit" class="btn btn-danger">Yes, delete</button>
+                    </div>
+                </form>
+
+
+
+<a class="navbar-brand"
+    href="#">Navbar</a>
+<button class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+
+
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <button class="btn btn-outline-light">
+                QV
+            </button>
+
+            <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse"
+                id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{% url 'storage_index' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle"
+                        href="https://example.com"
+                        id="dropdown01"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false">Staff</a>
+                        <div class="dropdown-menu"
+                            aria-labelledby="dropdown01">
+                            <a class="dropdown-item"
+                            href="{% url 'categories' %}">Category</a>
+                            <a class="dropdown-item"
+                            href="{% url 'items' %}">Item</a>
+                            <a class="dropdown-item"
+                            href="{% url 'itemactions' %}">Item Action</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                        href="{% url 'test' %}">Test</a>
+                    </li>
+                </ul>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item text-white">
+
+                        <span class="fa fa-user"></span>
+                        <span class="navbar-text text-white">
+                            Vo Trung Dung
+                        </span> 
+                        &nbsp;&nbsp;
+                        <button class="btn btn-sm btn-danger">
+                            Sign out
+                            <span class="fa fa-sign-out"></span>
+                        </button>
+                    </li>
+                    
+                    
+                </ul>
+            </div>
+        </nav>

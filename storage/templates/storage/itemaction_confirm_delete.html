@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Delete Item Action</h1>
+
+<p>Are you sure you want to delete the Item Action: {{ itemaction.item }} - ({{ itemaction.date }})?</p>
+
+<form action=""
+      method="POST">
+    {% csrf_token %}
+    <input type="submit"
+           class='delete-button'
+           value="Yes, delete.">
+</form>
+
+{% endblock %}

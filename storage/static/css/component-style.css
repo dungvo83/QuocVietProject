@@ -1,0 +1,229 @@
+/********************************************
+    Monochromatic Color Schemes
+    #EBF7E3, #9BD770, #66B032, #375F1B, #1B3409
+*********************************************/
+.tbody-mono {
+    background-color: #EBF7E3;
+}
+
+.tbody-cap-mono {
+    color: #1B3409;
+    font-weight: 500;
+}
+
+.tbody-text-mono {
+    color: #1B3409;
+    text-align: justify;
+    font-weight: normal;
+    font-size: medium;
+}
+
+.tbody-detail-mono {
+    color: #1B3409;
+    text-align: justify;
+    font-weight: 300;
+    font-size: smaller;
+}
+
+.thead-mono {
+    background-color: #375F1B;
+}
+
+.thead-text-mono {
+    color: #EBF7E3;
+    font-weight: bolder;
+}
+
+.nav-text-mono {
+    color: #9BD770;
+}
+
+.nav-mono {
+    background-color: #616161!important
+}
+
+.body-mono {
+    background-color: #9BD770;
+}
+
+.btn-mono {
+    background-color: #1B3409;
+    color: #EBF7E3;
+}
+
+.btn-reverse-mono {
+    color: #1B3409;
+    background-color: #EBF7E3;
+    border-color: #375F1B;
+}
+
+/********************************************
+    Navbar 616161
+*********************************************/
+.navbar {
+    background-color: #323232 !important;
+    font-weight: 400;
+}
+
+.navbar-toggler {
+    background-color: #EBF7E3;
+    color: #1B3409;
+}
+
+.navbar .navbar-brand {
+    color: #9BD770 !important;
+    background-color: #000;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 700;
+    font-size: medium;
+    border-width: 1px;
+    border-style: double;
+/*
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+*/
+    -webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,.16), 2px 2px 2px 2px rgba(0,0,0,.12);
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.16), 2px 2px 2px 2px rgba(0,0,0,.12);
+}
+
+/* .navbar .navbar-brand:hover {
+
+    color: #880e4f !important;
+
+} */
+
+.navbar .navbar-nav li a,
+.navbar .navbar-nav .nav-link {
+    color: #EBF7E3 !important;
+}
+
+.navbar .navbar-nav .nav-item :hover, 
+.navbar .navbar-nav .nav-item .nav-link :hover{
+    background-color: #EBF7E3 !important;
+    color: #1B3409 !important;
+}
+
+.navbar .navbar-nav .active > a, 
+.navbar .navbar-nav .active > a:hover, 
+.navbar .navbar-nav .active > a:focus {
+    font-weight: 500;
+    color: #9BD770 !important;
+}
+
+
+.navbar .navbar-nav .dropdown-menu > a.active,
+.navbar .navbar-nav .dropdown-menu > a.active:hover,
+.navbar .navbar-nav .dropdown-menu > a.active:focus {
+    background-color: #616161 !important;
+    color: #EBF7E3 !important;
+}
+
+.navbar .nav-item .dropdown-menu {
+    background-color: #EBF7E3 !important;
+    color: #1B3409 !important;
+}
+
+.navbar .nav-item .dropdown-menu .dropdown-item {
+    color: #1B3409 !important;
+}
+
+.navbar .nav-item .dropdown-menu .dropdown-item:hover {
+    color: #EBF7E3 !important;
+    background-color: #B4B7BA !important;
+}
+
+.dropdown:hover .dropdown-menu{
+    display:block;
+  }
+
+
+/********************************************
+    Background-Color
+*********************************************/
+.bg-tofu {
+    background-color: #EAE6DA;
+}
+
+.bg-sargasso-sea {
+    background-color: #485167;
+}
+
+.bg-sailor-blue {
+    background-color: #2E4A62;
+}
+
+.bg-warm-sand {
+    background-color: #C0AB8E;
+}
+
+.bg-coconut-milk {
+    background-color: #F0EDE5;
+}
+
+.bg-emperador {
+    background-color: #6C4F3D;
+}
+
+.bg-unique {
+    background-color: #880e4f;
+}
+
+.bg-none {
+    background-color: transparent;
+}
+
+.bg-harbor-mist {
+    background-color: #B4B7BA;
+}
+
+/********************************************
+    Text-Color
+*********************************************/
+
+.text-sailor-blue {
+    background-color: #2E4A62;
+}
+
+.text-warm-sand {
+    background-color: #C0AB8E;
+}
+
+.text-coconut-milk {
+    background-color: #F0EDE5;
+}
+
+.text-emperador {
+    background-color: #6C4F3D;
+}
+
+.text-unique {
+    background-color: #880e4f;
+}
+
+.text-none {
+    background-color: transparent;
+}
+
+/*
+    list hover-color dee2e6 #F0EDE5;
+*/
+.list-group-hover .list-group-item:hover {
+
+    background-color: #EEE;
+
+}
+
+a:hover {
+    color: #1B3409;
+}
+
+/*
+    list-group-item
+*/
+.list-group-item {
+    /*
+        dee2e6 -> table background color;
+    */
+    border: 1px solid #dee2e6;
+    line-height: 1em
+}

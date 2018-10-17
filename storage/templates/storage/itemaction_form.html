@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+{% block content %}
+<form action=""
+      method="POST"
+      role="form"
+      class="form-horizontal">
+
+    {% csrf_token %}
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <h3>CHANGE ITEM ACTION</h3>
+            <br>
+            {% for field in form %}
+            <div class="col-xs-7">
+                <div class="form-group"
+                     style="margin-left: 20px">
+                    <label for="id_{{ field.lable_tag }}">{{ field.label_tag }}</label>
+                    {% render_field field class="form-control" %}
+                    <span class="help-block"> {{ field.help_text }} </span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button"
+                                class="btn btn-danger"
+                                onclick="location.href='{{ itemaction.get_delete_url }}'">DELETE</button>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button type="submit"
+                                class="btn btn-primary">SAVE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+{% endblock content %}

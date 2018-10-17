@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div id="id_current_active" name="id_items">
+</div> 
+    
+
+
+    <div class="container-fluid">
+        <table class="table table-bordered">
+            <thead class="thead-mono" >
+                <tr>
+                    <th colspan="2" class="w-100 thead-text-mono">
+                        ITEM
+                        <a href="{{ item.get_absolute_url }}" class="float-right">
+                            <span class="text-warning fa fa-pencil"></span>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="tbody-mono">
+                <tr>
+                    <th class="w-30 theah-text-mono">NAME: </th>
+                    <td class="w-70 tbody-text-mono">{{item.name}}</td>
+                </tr>
+                <tr>
+                    <th class="w-30 theah-text-mono">DESCRIPTION: </th>
+                    <td class="w-70 tbody-text-mono">{{item.description}}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+
+    <br>        
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-sm-12 col-lg-2 mt-2">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Row:</label>
+                    </div>
+                    <select id="pageLength" class="custom-select custom-select-sm">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-4 mt-2">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">
+                            <span class="fa fa-search"></span>
+                        </label>
+                    </div>
+                    <input type="text" id="searchText" class="form-control form-control-sm" placeholder="Search...">
+                </div>
+            </div>
+            <div class="col-sm-0 col-lg-3">
+            </div>
+            <div class="col-sm-12 col-lg-3 mt-2">
+                <button class="btn btn-sm btn-block btn-reverse-mono" onclick="location.href='{% url 'itemaction_create'%}'">
+                    ADD ACTION &nbsp;
+                    <span class="fa fa-plus"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-2">
+        <table id="detailTable" class="table table-bordered">
+            <thead class="thead-mono thead-text-mono"> 
+                <tr>
+                    {# itemaction: date, quantity, price, status #}
+                    <th class="w-20"> 
+                        DATE
+                    </th>
+                    <th class="w-20 text-right"> 
+                        PRICE
+                    </th>
+                    <th class="w-20 text-right"> 
+                        QUANTITY
+                    </th>
+                    <th class="w-20 text-right"> 
+                        TOTAL
+                    </th>
+                    <th class="w-20 text-center"> 
+                        STATUS
+                    </th>
+                </tr>
+            </thead>
+            
+            <tbody class="tbody-mono">
+                {% for itemaction in item.itemaction_set.all%}
+                    <tr class="tbody-text-mono">
+                        <td class="w-20">
+                            <a href="{% url 'itemaction_update' pk=itemaction.pk %}" class="tbody-cap-mono">
+                                {{itemaction.date}}
+                            </a>
+                        </td>
+                        <td class="w-20 text-right">
+                                {{itemaction.price}}
+                            </td>
+                        <td class="w-20 text-right">
+                            {{itemaction.quantity}}
+                        </td>
+                        <td class="w-20 text-right">
+                            {{itemaction.get_total}}
+                        </td>
+                        <td class="w-20 text-center">
+                            {% if itemaction.status == 'i' %}
+                                INPUT
+                            {% else %}
+                                OUTPUT
+                            {% endif %}                            
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container-fluid">
+        <ul id="id_pagination" class="pagination pagination-sm justify-content-end">
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            _tableData("#detailTable", "#searchText", "#id_pagination", "#pageLength"); 
+        });
+
+        
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            
+            /*
+            $('#detailTable').DataTable();
+
+            $("#searchItem").on("keyup",function() {
+                var value = $(this).val().toLowerCase();
+                $("#itemData td.col-item").filter(function() {
+                    $(this).parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $("#searchAction").on("keyup",function() {
+                var value = $(this).val().toLowerCase();
+                $("#itemData td.col-action").filter(function() {
+                    $(this).parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+            */
+        });
+    </script>
+{% endblock content %}
+    
+
+<!--
+    {% for item in category.item_set.all %}
+                    <tr class="d-flex">
+                        <td class="col-sm-2">
+                            <img class="img-fluid" src="//placehold.it/512x512" class="card-img-top">
+                        </td>
+                        <td class="col-sm-4">
+                            {{item.name}} <br>
+                            <small> {{item.description}} </small>
+                        </td>
+                        <td class="col-sm-6 px-0 py-0">
+                            <div class="list-group list-group-flush">
+                                {% if item.itemaction_set.all %}
+                                    {% for itemaction in item.itemaction_set.all %}
+                                        <div class="list-group-item list-group-item-action list-group-item-light">
+                                            <h5> {{itemaction.date}} </h5>
+
+                                            <div class="card-group">
+                                                <div class="card border-secondary">
+                                                    <div class="card-header py-0">
+                                                        Price
+                                                    </div>
+                                                    <div class="card-body py-0">
+                                                        {{itemaction.price}}
+                                                    </div>
+                                                </div>
+                                                <div class="card border-secondary">
+                                                    <div class="card-header py-0">
+                                                        Quantity
+                                                    </div>
+                                                    <div class="card-body py-0">
+                                                        {{itemaction.quantity}}
+                                                    </div>
+                                                </div>
+                                                <div class="card border-secondary">
+                                                    <div class="card-header py-0">
+                                                        Total
+                                                    </div>
+                                                    <div class="card-body py-0">
+                                                        {{itemaction.get_total}}
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    
+                                {% endif %}
+                                    <div class="list-group-item list-group-item-action list-group-item-light">
+                                        <span class="text-danger">more...</span>
+                                    </div>
+                            </div>  
+                        </td>
+                    </tr>
+                {% endfor %}
+-->

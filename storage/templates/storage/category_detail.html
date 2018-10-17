@@ -1,0 +1,561 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div id="id_current_active" name="id_categories"></div>   
+    <style>
+        
+        
+        /*
+
+        label {
+            color: #f8f9fa !important;
+            
+        }
+        div.dataTables_wrapper div.dataTables_info {
+            color: #f8f9fa !important;
+        }
+        
+        .table-bordered {
+            border-color: grey;
+        }
+
+        .table-bordered {
+            border-color: grey;
+        }
+
+        border-color: #dae0e5;
+        --blue: #007bff;
+        --indigo: #6610f2;
+        --purple: #6f42c1;
+        --pink: #e83e8c;
+        --red: #dc3545;
+        --orange: #fd7e14;
+        --yellow: #ffc107;
+        --green: #28a745;
+        --teal: #20c997;
+        --cyan: #17a2b8;
+        --white: #fff;
+        --gray: #6c757d;
+        --gray-dark: #343a40;
+        --primary: #007bff;
+        --secondary: #6c757d;
+        --success: #28a745;
+        --info: #17a2b8;
+        --warning: #ffc107;
+        --danger: #dc3545;
+        --light: #f8f9fa;
+        --dark: #343a40;
+        */
+    </style>
+
+    <div class="container-fluid">
+        <table class="table table-bordered">
+            <thead class="thead-mono" >
+                <tr>
+                    <th colspan="2" class="w-100 thead-text-mono">
+                        CATEGORY 
+                        <a href="{{ category.get_absolute_url }}" class="float-right">
+                            <span class="text-warning fa fa-pencil"></span>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="tbody-mono">
+                <tr>
+                    <th class="w-30 theah-text-mono">NAME: </th>
+                    <td class="w-70 tbody-text-mono">{{category.name}}</td>
+                </tr>
+                <tr>
+                    <th class="w-30 theah-text-mono">DESCRIPTION: </th>
+                    <td class="w-70 tbody-text-mono">{{category.description}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    
+    <br>
+    {########################################################}
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-sm-12 col-lg-2 mt-2">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Row:</label>
+                    </div>
+                    <select id="pageLength" class="custom-select custom-select-sm">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-4 mt-2">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">
+                            <span class="fa fa-search"></span>
+                        </label>
+                    </div>
+                    <input type="text" id="searchText" class="form-control form-control-sm" placeholder="Search...">
+                </div>
+            </div>
+            <div class="col-sm-0 col-lg-3">
+            </div>
+            <div class="col-sm-12 col-lg-3 mt-2">
+                <button class="btn btn-sm btn-block btn-reverse-mono" onclick="location.href='{% url 'item_create'%}'">
+                    ADD ITEM &nbsp;
+                    <span class="fa fa-plus"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    {########################################################}
+    <div class="container-fluid mt-3">
+        <table id="detailTable" class="table table-bordered" data-pagination="true">
+            
+            <thead class="thead-mono thead-text-mono">
+                <tr>
+                    <th class="w-50 align-middle">
+                        ITEM
+                    </th>
+                    <th class="w-50 align-middle">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in category.item_set.all %}
+                    <tr class="tbody-mono">
+                        <td class="w-50">
+                            <div class="row">
+                                <div class="col-sm-3 d-none d-lg-block pr-0">
+                                    <img class="img-fluid" src="//placehold.it/512x512" class="card-img-top">
+                                </div>
+                                <div class="col-sm-9">
+                                    <a href="{% url 'item_detail' pk=item.pk %}" class="tbody-cap-mono">
+                                        {{item.name}}
+                                    </a>
+                                    <span class="text-truncate-3 tbody-detail-mono">{{item.description}}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="w-50 p-0">
+                            <div class="list-group list-group-flush list-group-hover">
+                                {% for itemaction in item.itemaction_set.all|slice:":2" %}
+                                    <a href="{% url 'itemaction_update' pk=itemaction.pk %}" 
+                                        class="list-group-item list-group-item-action bg-none tbody-detail-mono">
+
+                                        <span class="tbody-text-mono">{{itemaction.date}}</span>
+                                        <div class="card-group text-center mt-1">
+                                            <div class="col-sm-4 p-0 d-none d-lg-block card border-secondary">
+                                                <div class="card-header py-1">
+                                                    <span class="tbody-cap-mono">Price</span>
+                                                </div>
+                                                <div class="card-body py-1">
+                                                    {{itemaction.price}}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 p-0 d-none d-lg-block card border-secondary">
+                                                <div class="card-header py-1">
+                                                    <span class="tbody-cap-mono">Quantity</span>
+                                                </div>
+                                                <div class="card-body py-1">
+                                                    {{itemaction.quantity}}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5 p-0 card border-secondary">
+                                                <div class="card-header py-1">
+                                                    <span class="tbody-cap-mono">Total</span>
+                                                </div>
+                                                <div class="card-body py-1">
+                                                    {{itemaction.get_total}}
+                                                </div>
+                                            </div>
+                                        </div>     
+                                    </a>    
+                                {% endfor %}
+                                
+                                {% if item.itemaction_set.all.count > 2 %}
+                                    <a href="{% url 'item_detail' pk=item.pk %}" 
+                                        class="list-group-item list-group-item-action bg-none tbody-detail-mono">
+                                        <span class="tbody-text-mono">more...</span>
+                                    </a>
+                                {% endif %}
+                            </div>  
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>    
+    </div>
+    <br>
+    {########################################################}
+    <div class="container-fluid">
+        <ul id="id_pagination" class="pagination pagination-sm justify-content-center">
+        </ul>
+    </div>
+    {########################################################}
+
+
+
+    <script>
+        $(document).ready(function() {
+           _tableData("#detailTable", "#searchText", "#id_pagination", "#pageLength"); 
+        });
+
+        
+    </script>
+{% endblock content %}
+    
+
+<!--
+
+
+    function myPagination(totalRow, row){
+            rowTotal = $(table + ' tbody tr').length;
+            rowsShown = 5;
+            numPages = rowTotal / rowsShown;
+
+            $(pagination).children('li').remove();
+            console.log("pagination:" + $('#xxx').html());
+            
+
+            $(pagination).append('<li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">&laquo;</span></a></li>');
+            for(var i=0; i<numPages; i++) {
+                var pageNum = i + 1;
+                $(pagination).append('<li class="page-item"><a class="page-link" index='+pageNum+' >'+pageNum+'</a></li>');
+            }
+            $(pagination).append('<li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a></li>');
+            $(pagination).children('li').eq(1).addClass('active');
+
+
+            console.log("pagination:" + $('#xxx').html());
+        }
+
+        function myDataTable(table, pagination, filter) {
+            
+            var rowPerPage = 5;
+            
+
+            $(pagination + ' li').remove();
+
+            $(filter).on('keyup', function(){
+                var text = $(filter).val();
+                
+
+                var total = 0;
+                $(table + ' tr').each(function(){
+                    if($(this).text().indexOf(text) > -1) {
+                        total++;
+                    } else {
+                        //$(this).toggle();
+                    }
+                });
+                console.log("total: " + total);
+
+
+                
+                
+                
+                /*
+                var total = 0;
+                $(table + ' tr').filter(function(){
+
+                    if( $(this).text().indexOf(text) > -1 ) {
+                        total++;
+                    } else {
+                        $(this).parent().toggle();
+                    }
+                });
+                */
+
+
+            
+
+                
+            }); 
+        }
+
+        
+
+
+    function setupDataTable(table, pagination) {
+            /*var table = '#detailTable';*/
+            /* copy tbody */
+            var bkTBody = $(table + ' tbody').clone();
+            
+            var rowTotal = 0;
+            var rowsShown = 0;
+            var numPages = 0;
+
+            setupPagination();
+
+            $("#searchText").on("keypress", function(e){
+                if(e.keyCode==13) {
+                    filterTable(table, $(this).val(), bkTBody);
+                }
+            });
+
+            $(pagination + ' li a').on('click', function(){
+                alert($(this).html());
+
+                $(pagination + ' li').removeClass('active');
+                $(this).parent().addClass('active');
+                var currentIndex = $(this).attr('index') - 1;
+                var startItem = currentIndex * rowsShown;
+                var endItem = startItem + rowsShown;
+
+                tableInRange(table,startItem,endItem);
+            });
+
+            function setupPagination(){
+                rowTotal = $(table + ' tbody tr').length;
+                rowsShown = 5;
+                numPages = rowTotal / rowsShown;
+
+                $(pagination).children('li').remove();
+                console.log("pagination:" + $('#xxx').html());
+                
+
+                $(pagination).append('<li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">&laquo;</span></a></li>');
+                for(var i=0; i<numPages; i++) {
+                    var pageNum = i + 1;
+                    $(pagination).append('<li class="page-item"><a class="page-link" index='+pageNum+' >'+pageNum+'</a></li>');
+                }
+                $(pagination).append('<li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a></li>');
+                $(pagination).children('li').eq(1).addClass('active');
+
+
+                console.log("pagination:" + $('#xxx').html());
+            }
+
+            function tbodyRemove(){
+                $(table + " tbody").children().remove();
+            }
+
+            function tbodyReset(bkTBody){
+                $(table + " tbody").append(bkTBody.html());
+            }
+
+            function filterTable(table, filter, bkTBody){
+                tbodyRemove();
+                tbodyReset(bkTBody);
+                
+                $(table + ' tbody tr').filter(function(){
+                    if($(this).text().indexOf(filter) > -1) {
+                        /*
+                        ...do somthing ???
+                        */
+                    } else {
+                        $(this).remove();
+                    }
+                });
+                
+                setupPagination();
+            }
+
+
+            
+
+            function tableInRange(data, start, end){
+                var i = 0;
+                $(data + ' tr').each(function(){
+                    i++;
+                    if(start<=i && i<end){
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        }
+
+
+-->
+
+<!--
+
+    /*
+            $('#maxRows').on('change', function(){
+                $('.pagination').html('');
+                var trnum = 0;
+                var maxRows = parseInt($(this).val());
+                var totalRows = $(table+' tbody tr').length;
+                $(table+' tr:gt(0)').each(function(){
+                    trnum++;
+                    if(trnum>maxRows) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+
+                if (totalRows > maxRows) {
+                    var pageNum = Math.ceil(totalRows/maxRows);
+                    for (var i = 0; i<=pagenum; i++) {
+                        $('.pagination').append('<li class="page-item page-link" data-page="'+i+'">'+ i +'</li>').show();
+                    }
+                }
+
+                $('.pagination li:first-child').addClass('active');
+                $('.pagination li').on('click', function(){
+
+                });
+            });
+            */
+
+            /*
+            $('#detailTable').DataTable();
+            $("#searchItem").on("keyup",function() {
+                var value = $(this).val().toLowerCase();
+                $("#itemData td.col-item").filter(function() {
+                    $(this).parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $("#searchAction").on("keyup",function() {
+                var value = $(this).val().toLowerCase();
+                $("#itemData td.col-action").filter(function() {
+                    $(this).parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+            */
+
+-->
+
+<!--
+    {% for item in category.item_set.all %}
+                    <tr class="d-flex">
+                        <td class="col-sm-2">
+                            <img class="img-fluid" src="//placehold.it/512x512" class="card-img-top">
+                        </td>
+                        <td class="col-sm-4">
+                            {{item.name}} <br>
+                            <small> {{item.description}} </small>
+                        </td>
+                        <td class="col-sm-6 px-0 py-0">
+                            <div class="list-group list-group-flush">
+                                {% if item.itemaction_set.all %}
+                                    {% for itemaction in item.itemaction_set.all %}
+                                        <div class="list-group-item list-group-item-action list-group-item-light">
+                                            <h5> {{itemaction.date}} </h5>
+
+                                            <div class="card-group">
+                                                <div class="card border-secondary">
+                                                    <div class="card-header py-0">
+                                                        Price
+                                                    </div>
+                                                    <div class="card-body py-0">
+                                                        {{itemaction.price}}
+                                                    </div>
+                                                </div>
+                                                <div class="card border-secondary">
+                                                    <div class="card-header py-0">
+                                                        Quantity
+                                                    </div>
+                                                    <div class="card-body py-0">
+                                                        {{itemaction.quantity}}
+                                                    </div>
+                                                </div>
+                                                <div class="card border-secondary">
+                                                    <div class="card-header py-0">
+                                                        Total
+                                                    </div>
+                                                    <div class="card-body py-0">
+                                                        {{itemaction.get_total}}
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    
+                                {% endif %}
+                                    <div class="list-group-item list-group-item-action list-group-item-light">
+                                        <span class="text-danger">more...</span>
+                                    </div>
+                            </div>  
+                        </td>
+                    </tr>
+                {% endfor %}
+
+
+
+
+
+
+
+                /*
+            console.log(rowTotal);
+            */
+            
+            /*
+
+            console.log("bkTBody: " + bkTBody.html());
+
+            console.log("tbody1: " + $(table + " tbody").html());
+            
+            $('#btn-remove').click(function(){
+                $(table + " tbody").children().remove();
+                console.log("table-remove: " + $(table).html());
+            });
+
+            $('#btn-reset').click(function(){
+
+                $(table + " tbody").append(bkTBody.html());
+                console.log("table-reset: " + $(table).html());
+            });
+
+            
+    
+            function tbody_reset() {
+                $(table + " > tbody").append(bkTBody);
+            }
+
+            filterTable(table, searchText);
+            console.log("data:" + dataTable);
+
+            var rowTotal = $(dataTable + ' tbody tr').length;
+            console.log("rowTotal:" + rowTotal )
+            
+            console.log("data:" + dataTable);
+
+            var rowTotal = $(dataTable + ' tbody tr').length;
+            console.log("rowTotal:" + rowTotal )
+
+            var rowsShown = 5;
+            var numPages = rowTotal / rowsShown;
+            $('.pagination').append('<li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">&laquo;</span></a></li>');
+            for(var i=0; i<numPages; i++) {
+                var pageNum = i + 1;
+                $('.pagination').append('<li class="page-item"><a class="page-link" index='+pageNum+' >'+pageNum+'</a></li>');
+            }
+            $('.pagination').append('<li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a></li>');
+            $('.pagination').children('li').eq(1).addClass('active');
+            
+            tableInRange(data, 0, rowsShown);
+
+            
+            
+            
+            
+            $('#tableSearch').on('keyup', function() {
+                
+            });
+
+            $('.pagination li a').on('click', function(){
+                $('.pagination li').removeClass('active');
+                $(this).parent().addClass('active');
+                var currentIndex = $(this).attr('index') - 1;
+                var startItem = currentIndex * rowsShown;
+                var endItem = startItem + rowsShown;
+
+                tableInRange(table,startItem,endItem);
+                
+
+            });
+
+            */
+-->

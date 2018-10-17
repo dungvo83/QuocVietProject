@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+
+<form method="post"
+      novalidate>
+    {% csrf_token %}
+
+    <div class="row"
+         style="padding-left:50px; padding-right:50px; padding-bottom:50px">
+        {% include './includes/bs4_form.html' with form=form %}
+    </div>
+
+    <div class="row thumbnail thumbnail-sm"
+         style="padding:10px; background: #eee">
+        <div class="col-xs-6 col-md-6">
+            <button type="button"
+                    class="btn btn-danger"
+                    onclick="location.href='{{ item.get_delete_url }}'">DELETE</button>
+        </div>
+        <div class="col-xs-6 col-md-6 text-right">
+            <button type="submit"
+                    class="btn btn-primary">SAVE</button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock content %}

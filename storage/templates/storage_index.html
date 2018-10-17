@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner border border-dark shadow-lg">
+        <div class="carousel-item active">
+            <div style="height:400px">
+                {% comment %} <img src="//placehold.it/512x512?text=..." class="h-100 w-100">     {% endcomment %}
+                {% comment %} <span class="h-100 w-100 d-flex justify-content-center align-items-center">
+                    <h1>123</h1>
+                </span>     {% endcomment %}
+
+                <img src="{% static 'bg/1.jpg' %}" alt="" class="h-100 w-100">
+            </div>
+
+            <div class="carousel-caption">
+                <h3>Luca 16:10</h3>
+                <p> 
+                    <h6>
+                        Ai trung-tín trong việc rất nhỏ, cũng trung-tín trong việc lớn; 
+                        <br>
+                        ai bất-nghĩa trong việc rất nhỏ, cũng bất-nghĩa trong việc lớn.
+                    </h6> 
+                </p>
+            </div>   
+        </div>
+        <div class="carousel-item">
+            <div style="height:400px">
+                <img src="{% static 'bg/2.jpg' %}" alt="" class="h-100 w-100">
+            </div>
+
+            <div class="carousel-caption">
+                <h3>Châm Ngôn 9:10</h3>
+                <p>
+                    <h6>
+                            Kính sợ Đức Giê-hô-va, ấy là khởi đầu sự khôn ngoan; 
+                            <br>
+                            Sự nhìn biết Đấng Thánh, đó là sự thông sáng.
+                    </h6>
+                </p>
+            </div>   
+        </div>
+        <div class="carousel-item">
+            <div style="height:400px">
+                <img src="{% static 'bg/3.jpg' %}" alt="" class="h-100 w-100">
+            </div>
+
+            <div class="carousel-caption">
+                <h3>Châm Ngôn 21:5</h3>
+                <p>
+                    <h6>
+                            Các ý-tưởng của người cần-mẫn dẫn đến sự dư-dật;
+                            <br>
+                            Còn những kẻ khờ-dại chỉ chạy đến điều thiếu-thốn
+                    </h6>
+                </p>
+            </div>   
+        </div>
+        
+    </div>
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+
+
+
+{% endblock content %}
+    

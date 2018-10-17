@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div id="id_current_active" name="id_items">
+    </div>   
+
+
+    <div class="container-fluid mb-3">
+        <div class="row">
+            <div class="col-12 col-sm-6 mt-2">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text fa fa-search"></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Item search...">
+                </div>            
+            </div>
+            <div class="col-lg-3 mt-2"></div>
+
+            <div class="col-12 col-sm-6 col-lg-3 mt-2 text-right">
+                <button class="btn btn-sm btn-block btn-reverse-mono" onclick="location.href='{% url 'item_create' %}'">
+                    ADD ITEM 
+                    <span class="fa fa-plus"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    {# 123 #}
+
+    <div class="container-fluid mt-3">
+        <table id="detailTable" class="table table-bordered" data-pagination="true">
+            
+            <thead class="thead-mono thead-text-mono">
+                <tr>
+                    <th class="w-50 align-middle">
+                        ITEM
+                    </th>
+                    <th class="w-50 align-middle">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in item_list %}
+                    <tr class="tbody-mono">
+                        <td class="w-50">
+                            <div class="row">
+                                <div class="col-sm-3 d-none d-lg-block pr-0">
+                                    <img class="img-fluid" src="//placehold.it/512x512" class="card-img-top">
+                                </div>
+                                <div class="col-sm-9">
+                                    <a href="{% url 'item_detail' pk=item.pk %}" class="tbody-cap-mono">
+                                        {{item.name}}
+                                    </a>
+                                    <span class="text-truncate-3 tbody-detail-mono">{{item.description}}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="w-50 p-0">
+                            <div class="list-group list-group-flush list-group-hover">
+                                {% for itemaction in item.itemaction_set.all|slice:":2" %}
+                                <a href="{% url 'itemaction_update' pk=itemaction.pk %}" 
+                                    class="list-group-item list-group-item-action bg-none tbody-detail-mono">
+
+                                    <span class="tbody-text-mono">{{itemaction.date}}</span>
+                                    <div class="card-group text-center mt-1">
+                                        <div class="col-sm-4 p-0 d-none d-lg-block card border-secondary">
+                                            <div class="card-header py-1">
+                                                <span class="tbody-cap-mono">Price</span>
+                                            </div>
+                                            <div class="card-body py-1">
+                                                {{itemaction.price}}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 p-0 d-none d-lg-block card border-secondary">
+                                            <div class="card-header py-1">
+                                                <span class="tbody-cap-mono">Quantity</span>
+                                            </div>
+                                            <div class="card-body py-1">
+                                                {{itemaction.quantity}}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 p-0 card border-secondary">
+                                            <div class="card-header py-1">
+                                                <span class="tbody-cap-mono">Total</span>
+                                            </div>
+                                            <div class="card-body py-1">
+                                                {{itemaction.get_total}}
+                                            </div>
+                                        </div>
+                                    </div>     
+                                </a>     
+                                {% endfor %}
+                                
+                                {% if item.itemaction_set.all.count > 2 %}
+                                <a href="{% url 'item_detail' pk=item.pk %}" 
+                                    class="list-group-item list-group-item-action bg-none tbody-detail-mono">
+                                    <span class="tbody-text-mono">more...</span>
+                                </a>
+                                {% endif %}
+                            </div>  
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>    
+    </div>
+    <br>
+
+    
+
+    <script>
+        $(document).ready(function() {
+            $("#searchText").on("keyup",function() {
+                var value = $(this).val().toLowerCase();
+                $("#categoryData tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+{% endblock content %}
+
+<!--
+    <div class="card-group" id="categoryData">
+        {% for category in category_list %}
+        <div class="col-sm-4 py-3">
+            <div class="card border-dark h-100 mb-5" onclick="location.href='{% url 'category_detail' pk=category.pk %}'">
+                <div class="card-header bg-dark text-info">
+                    <a href="{{ category.get_absolute_url }}"
+                       class="float-right">
+                        <span class="text-warning fa fa-pencil"></span>
+                    </a>
+                    <p>{{category.name}} </p>
+                    <small> {{ category.description }} </small>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% if category.get_items %}
+                            {% for item in category.get_items %}
+                                <div class="col-6 col-sm-6 py-2 px-2">
+                                    <img src="//placehold.it/512x512" class="card-img-top">
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="col-6 col-sm-6 py-2 px-2">
+                            <img src="//placehold.it/123?text=..." class="card-img-top">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+-->

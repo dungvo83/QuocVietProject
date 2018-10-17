@@ -1,0 +1,687 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1>Hello World!</h1>
+    <p>Three equal width columns! Try to add a new div with class="col" inside the row class - this will create four
+        equal-width columns.</p>
+    <div class="row">
+        <div class="col"
+             style="background-color:lavender;">.col</div>
+        <div class="col"
+             style="background-color:orange;">.col</div>
+        <div class="col"
+             style="background-color:lavender;">.col</div>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Black/Dark Table</h2>
+    <p>The .table-dark class adds a black background to the table:</p>
+    <table class="table table-dark table-striped">
+
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+            </tr>
+            <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+            </tr>
+            <tr>
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <h2>Striped Rows</h2>
+    <p>The .table-striped class adds zebra-stripes to a table:</p>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+            </tr>
+            <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+            </tr>
+            <tr>
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <h2>Contextual Classes</h2>
+    <p>Contextual classes can be used to color the table, table rows or table cells. The classes that can be used are:
+        .table-primary, .table-success, .table-info, .table-warning, .table-danger, .table-active, .table-secondary,
+        .table-light and .table-dark:</p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Default</td>
+                <td>Defaultson</td>
+                <td>def@somemail.com</td>
+            </tr>
+            <tr class="table-primary">
+                <td>Primary</td>
+                <td>Joe</td>
+                <td>joe@example.com</td>
+            </tr>
+            <tr class="table-success">
+                <td>Success</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+            </tr>
+            <tr class="table-danger">
+                <td>Danger</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+            </tr>
+            <tr class="table-info">
+                <td>Info</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+            </tr>
+            <tr class="table-warning">
+                <td>Warning</td>
+                <td>Refs</td>
+                <td>bo@example.com</td>
+            </tr>
+            <tr class="table-active">
+                <td>Active</td>
+                <td>Activeson</td>
+                <td>act@example.com</td>
+            </tr>
+            <tr class="table-secondary">
+                <td>Secondary</td>
+                <td>Secondson</td>
+                <td>sec@example.com</td>
+            </tr>
+            <tr class="table-light">
+                <td>Light</td>
+                <td>Angie</td>
+                <td>angie@example.com</td>
+            </tr>
+            <tr class="table-dark text-dark">
+                <td>Dark</td>
+                <td>Bo</td>
+                <td>bo@example.com</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <h2>Basic Card</h2>
+    <div class="card bg-success text-white">
+        <div class="card-header">123</div>
+        <div class="card-body">
+            <button type="button"
+                    class="btn btn-primary">abc</button>
+            <button type="button"
+                    class="btn btn-dark float-right">xyz</button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Card Image</h2>
+    <p>Image at the top (card-img-top):</p>
+    <div class="card"
+         style="width:400px">
+        <img class="card-img-top"
+             src="img_avatar1.png"
+             alt="Card image"
+             style="width:100%">
+        <div class="card-body">
+            <h4 class="card-title">John Doe</h4>
+            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+            <a href="#"
+               class="btn btn-primary">See Profile</a>
+        </div>
+    </div>
+    <br>
+
+    <p>Image at the bottom (card-img-bottom):</p>
+    <div class="card"
+         style="width:400px">
+        <div class="card-body">
+            <h4 class="card-title">Jane Doe</h4>
+            <p class="card-text">Some example text some example text. Jane Doe is an architect and engineer</p>
+            <a href="#"
+               class="btn btn-primary">See Profile</a>
+        </div>
+        <img class="card-img-bottom"
+             src="img_avatar6.png"
+             alt="Card image"
+             style="width:100%">
+    </div>
+</div>
+
+<div class="container">
+    <div class="card bg-danger text-white">
+        <div class="card-header">
+            Header
+        </div>
+        <div class="card-body">
+            Body
+        </div>
+
+    </div>
+</div>
+
+<br><br>
+
+<div class="container">
+    <div class="card-deck">
+        <div class="card bg-primary">
+            <div class="card-body text-center">
+                <p class="card-text">Some text inside the first card</p>
+            </div>
+        </div>
+        <div class="card bg-warning">
+            <div class="card-body text-center">
+                <p class="card-text">Some text inside the second card</p>
+            </div>
+        </div>
+        <div class="card bg-success">
+            <div class="card-body text-center">
+                <p class="card-text">Some text inside the third card</p>
+            </div>
+        </div>
+        <div class="card bg-danger">
+            <div class="card-body text-center">
+                <p class="card-text">Some text inside the fourth card</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="container">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active"
+               data-toggle="tab"
+               href="#home">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               data-toggle="tab"
+               href="#menu1">Menu 1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               data-toggle="tab"
+               href="#menu2">Menu 2</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane container active"
+             id="home">...home</div>
+        <div class="tab-pane container fade"
+             id="menu1">...menu1</div>
+        <div class="tab-pane container fade"
+             id="menu2">...menu2</div>
+    </div>
+</div>
+<div class="container">
+    <h1>Horizontal Centering</h1>
+    <p>Center an element with the .mx-auto class:</p>
+    <div class="mx-auto bg-warning"
+         style="width:150px">Centered</div>
+</div>
+<br>
+<br>
+<br>
+<div class="container">
+    <h1>Width Utilities</h1>
+    <p>Set the width of an element with the w-* classes:</p>
+    <div class="w-25 bg-warning">Width 25%</div>
+    <div class="w-50 bg-warning">Width 50%</div>
+    <div class="w-75 bg-warning">Width 75%</div>
+    <div class="w-100 bg-warning">Width 100%</div>
+    <div class="mw-100 bg-warning">Max Width 100%</div>
+</div>
+<br>
+<br>
+<br>
+<div class="container">
+    <h1>Height Utilities</h1>
+    <p>Set the height of an element with the w-* classes:</p>
+    <div style="height:200px;background-color:#ddd">
+        <div class="h-25 d-inline-block p-2 bg-warning">Height 25%</div>
+        <div class="h-50 d-inline-block p-2 bg-warning">Height 50%</div>
+        <div class="h-75 d-inline-block p-2 bg-warning">Height 75%</div>
+        <div class="h-100 d-inline-block p-2 bg-warning">Height 100%</div>
+        <div class="mh-100 d-inline-block p-2 bg-warning"
+             style="height:500px">Max Height 100%</div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+
+<div class="container">
+    <h1>Center Horizontal & Vertical</h1>
+    <div class="mx-auto bg-warning"
+         style="width:50px">Height 50%</div>
+    <br>
+
+    <div style="height:200px; background-color:palegreen">
+        <div class="mx-auto bg-warning"
+             style="width:500px">Height 50%</div>
+
+    </div>
+</div>
+<div class="container mt-3">
+    <h2>Custom Select Menu</h2>
+    <p>To create a custom select menu, add the .custom-select class to the select element:</p>
+    <form action="/action_page.php">
+        <select name="cars"
+                class="custom-select mb-3">
+            <option selected>Custom Select Menu</option>
+            <option value="volvo">Volvo</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select>
+        <button type="submit"
+                class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<div class="container">
+    <h2>Custom Select Menu</h2>
+    <p>To create a custom select menu, add the .custom-select class to the select element:</p>
+    <form action="/action_page.php">
+        <select name="cars"
+                class="custom-select  mb-3">
+            <option selected>Custom Select Menu</option>
+            <option value="volvo">Volvo</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select>
+        <button type="submit"
+                class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<br>
+<br>
+<br>
+<div id="demo"
+     class="carousel slide"
+     data-ride="carousel">
+
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        <li data-target="#demo"
+            data-slide-to="0"
+            class="active"></li>
+        <li data-target="#demo"
+            data-slide-to="1"></li>
+        <li data-target="#demo"
+            data-slide-to="2"></li>
+    </ul>
+
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="card bg-primary">
+                <div class="card-body text-center">
+                    <p class="card-text">Some text inside the first card</p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="card bg-warning">
+                <div class="card-body text-center">
+                    <p class="card-text">Some text inside the first card</p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="card bg-danger">
+                <div class="card-body text-center">
+                    <p class="card-text">Some text inside the first card</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev"
+       href="#demo"
+       data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next"
+       href="#demo"
+       data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+
+<br>
+<br>
+<br>
+<div class="container">
+    <h2>Fading Modal</h2>
+    <p>Add the "fade" class to the modal container if you want the modal to fade in on open and fade out on close.</p>
+
+    <!-- Button to Open the Modal -->
+    <button type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#myModal">
+        Open modal
+    </button>
+
+    <!-- The Modal -->
+    <div class="modal fade"
+         id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button"
+                            class="close"
+                            data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-danger"
+                            data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br>
+<br>
+<br>
+<div class="container">
+    <h2>Fading Modal</h2>
+    <p>Add the "fade" class to the modal container if you want the modal to fade in on open and fade out on close.</p>
+
+    <!-- Button to Open the Modal -->
+    <button type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#myModal1">
+        Open modal
+    </button>
+
+    <!-- The Modal -->
+    <div class="modal fade"
+         id="myModal1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button"
+                            class="close"
+                            data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="/action_page.php">
+                        <div class="form-group">
+                            <label for="email">Email address:</label>
+                            <input type="email"
+                                   class="form-control"
+                                   id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Password:</label>
+                            <input type="password"
+                                   class="form-control"
+                                   id="pwd">
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input"
+                                       type="checkbox"> Remember me
+                            </label>
+                        </div>
+                        <button type="submit"
+                                class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-danger"
+                            data-dismiss="modal">kaka</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br>
+<br>
+<br>
+<div class="container mt-3">
+    <h2>Justify content</h2>
+    <p>Use the .justify-content-* classes to change the alignment of flex items. Choose from start (default), end,
+        center, between or around:</p>
+    <div class="d-flex justify-content-start bg-secondary mb-3">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary">Flex item 3</div>
+    </div>
+    <div class="d-flex justify-content-end bg-secondary mb-3">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary">Flex item 3</div>
+    </div>
+    <div class="d-flex justify-content-center bg-secondary mb-3">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary">Flex item 3</div>
+    </div>
+    <div class="d-flex justify-content-between bg-secondary mb-3">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary">Flex item 3</div>
+    </div>
+    <div class="d-flex justify-content-around bg-secondary mb-3">
+        <div class="p-2 bg-info">Flex item 1</div>
+        <div class="p-2 bg-warning">Flex item 2</div>
+        <div class="p-2 bg-primary">Flex item 3</div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<div class="contain-fluid bg-secondary">
+    <div class="d-flex"
+         style="height:200px">
+        <div class="mx-auto my-auto d-block">
+            123
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<div class="container bg-danger"
+     style="height: 300px;">
+    <div class="container w-100 h-100">
+        <div class="row align-items-center h-100">
+            <div class="col-md-6">
+                <h1 class="alert alert-primary">Vertical</h1>
+            </div>
+            <div class="col-md-6">
+                <h1 class="alert alert-success">Vertical</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<div class="container bg-info"
+     style="height: 300px;">
+    <div class="container w-100 h-100 bg-info">
+        <div class="row align-items-center justify-content-center h-100">
+            <div>
+                <h1 class="alert alert-primary">Vertical</h1>
+            </div>
+
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<div class="d-flex justify-content-center align-items-center"
+     style="height:100px;">
+    <span class="bg-primary">MIDDLE</span>
+</div>
+
+
+<br>
+<br>
+<br>
+<div class="invalid-feedback">
+    Valid first name is required.
+</div>
+ 
+<br>
+<div class="container">
+    <div class="row">
+
+        <div class="col-12">
+            <div class="card-deck">
+                <!-- 4 of these -->
+                <div class="card">
+                    <img src="//placehold.it/700x390" class="card-img-top">
+                    <div class="card-body">...</div>
+                </div>
+                <div class="card">
+                    <img src="//placehold.it/600" class="card-img-top">
+                    <div class="card-body">...</div>
+                </div>
+                <div class="card">
+                    <img src="//placehold.it/600x400" class="card-img-top">
+                    <div class="card-body">...</div>
+                </div>
+                <div class="card">
+                    <img src="//placehold.it/600" class="card-img-top">
+                    <div class="card-body">...</div>
+                </div>
+                <div class="w-100 py-2"></div>
+                <!-- 4 of these -->
+                <div class="card">
+                    <img src="//placehold.it/700x390" class="card-img-top img-adjusted">
+                    <div class="card-body">...</div>
+                </div>
+                <div class="card">
+                    <img src="//placehold.it/600" class="card-img-top img-adjusted">
+                    <div class="card-body">...</div>
+                </div>
+                <div class="card">
+                    <img src="//placehold.it/600x400" class="card-img-top img-adjusted">
+                    <div class="card-body">...</div>
+                </div>
+                <div class="card">
+                    <img src="//placehold.it/600" class="card-img-top img-adjusted">
+                    <div class="card-body">...</div>
+                </div>
+                <div class="w-100 py-2"></div>
+                <!-- 4 of these -->
+                <div class="card">
+                    <img src="//placehold.it/800x400" class="card-img-top img-adjusted">
+                    <div class="card-body">...</div>
+                </div>
+                <div class="card">
+                    <img src="//placehold.it/600" class="card-img-top img-adjusted">
+                    <div class="card-body">...</div>
+                </div>
+                <div class="card">
+                    <img src="//placehold.it/600" class="card-img-top img-adjusted">
+                    <div class="card-body">...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+{% endblock content %}
