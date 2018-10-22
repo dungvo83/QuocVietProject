@@ -133,10 +133,10 @@
             <a class="navbar-brand py-1 rounded">QuocVietShop</a>
 
             
-        {% comment %} {% if user.is_authenticated %} {% endcomment %}
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" 
             data-target="#navbarMain" aria-controls="navbarTogglerDemo03" 
-            aria-expanded="true" aria-label="Toggle navigation">
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             
@@ -148,10 +148,11 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle py-1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle py-1" id="navbarDropdown" role="button" 
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Management
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a id="id_categories" class="dropdown-item" href="{% url 'categories' %}">Category</a>
                             <a id="id_items" class="dropdown-item" href="{% url 'items' %}">Item</a>
                             <a id="id_itemactions" class="dropdown-item" href="{% url 'itemactions' %}">Item Action</a>
@@ -164,9 +165,6 @@
                     </li>
 
                     
-                    {% comment %} <li class="nav-item">
-                        <a class="nav-link py-1" href="{% url 'test' %}">Test</a>
-                    </li> {% endcomment %}
                 </ul>
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
