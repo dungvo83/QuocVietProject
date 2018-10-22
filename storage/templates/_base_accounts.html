@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>
+        {% block title %}
+        Home
+        {% endblock title %}
+    </title>
+
+    {% load static %}
+
+    <!-- ICON -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="{% static 'maxcdn/bootstrap/4.1.3/css/bootstrap.min.css' %}">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'maxcdn/jquery/3.3.1/jquery.min.js' %}"></script>
+    <!--
+        <script src="{% static 'maxcdn/popper/1.14.4/popper.js' %}"></script>
+    -->
+    
+    <script src="{% static 'maxcdn/bootstrap/4.1.3/js/bootstrap.min.js' %}"></script>
+    
+
+    <!-- Data Table -->
+    <link rel="stylesheet" 
+        href="{% static 'DataTables/DataTables-1.10.19/css/dataTables.bootstrap4.min.css' %}">
+    <script src="{% static 'DataTables/DataTables-1.10.19/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'DataTables/DataTables-1.10.19/js/dataTables.bootstrap4.min.js' %}"></script>
+
+
+    <link rel="stylesheet" href="{% static 'css/component-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/account-style.css' %}">
+
+    
+    
+
+</head>
+
+{% comment %} <body class="body-mono"> {% endcomment %}
+<body class="body-mono">
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top navbar-shadow">
+        <a class="navbar-brand py-1 rounded">QuocVietShop</a>
+        <ul class="navbar-nav"> 
+            <li class="nav-item">
+                <a class="nav-link py-1" href="{% url 'login'%}?next={{request.path}}">
+                    <span class="fa fa-sign-in"></span>
+                    <span>Sign in</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    {% block content %}
+    
+    {% endblock content %}
+        
+
+    <footer class="footer">
+        <span>
+            Copyright 2018 by Dung Vo. All rights reserved.
+            <br>
+            Email: trungdungsgn@gmail.com
+        </span>
+    </footer>
+</body>
+
+
+
+</html>

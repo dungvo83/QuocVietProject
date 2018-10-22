@@ -2,6 +2,21 @@
     Monochromatic Color Schemes
     #EBF7E3, #9BD770, #66B032, #375F1B, #1B3409
 *********************************************/
+
+.text-mono {
+    color: #323232;
+}
+
+.form-control {
+    color: #323232;
+    
+}
+
+.border-mono {
+    border-color: #66B032;
+}
+
+
 .tbody-mono {
     background-color: #EBF7E3;
 }
@@ -44,6 +59,11 @@
 
 .body-mono {
     background-color: #9BD770;
+    /* background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); 
+    background-repeat: repeat; 
+    background-position:center; 
+    background-size:cover;  */
+    /* padding:10px; */
 }
 
 .btn-mono {
@@ -133,7 +153,7 @@
 }
 
 .dropdown:hover .dropdown-menu{
-    display:block;
+    /* display:block; */
   }
 
 

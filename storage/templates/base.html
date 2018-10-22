@@ -61,6 +61,10 @@
     -->
     <link rel="stylesheet" href="{% static 'css/component-style.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/account-style.css' %}">
+    
+        
+
 
     <script type="text/javascript">
 
@@ -122,13 +126,20 @@
         mediumvioletred
     -->
     
+    
+    
+        
+
+
     <nav class="navbar navbar-light navbar-expand-lg fixed-top navbar-shadow">
             <a class="navbar-brand py-1 rounded">QuocVietShop</a>
-    
+
+            
+        {% comment %} {% if user.is_authenticated %} {% endcomment %}
             <button class="navbar-toggler" type="button" data-toggle="collapse" 
-                data-target="#navbarMain" aria-controls="navbarTogglerDemo03" 
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            data-target="#navbarMain" aria-controls="navbarTogglerDemo03" 
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
             </button>
             
             
@@ -137,10 +148,10 @@
                     <li class="nav-item">
                         <a id="id_storage_index" class="nav-link py-1" href="{% url 'storage_index' %}">Home</a>
                     </li>
-    
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle py-1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Supervisor
+                            Management
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a id="id_categories" class="dropdown-item" href="{% url 'categories' %}">Category</a>
@@ -151,34 +162,54 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="">Dashboard</a>
+                        <a class="nav-link py-1" href="">Summary</a>
                     </li>
-    
+
                     
-                    <li class="nav-item">
+                    {% comment %} <li class="nav-item">
                         <a class="nav-link py-1" href="{% url 'test' %}">Test</a>
-                    </li>
+                    </li> {% endcomment %}
                 </ul>
-
-
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link py-1" href="#">
-                            <span class="fa fa-user"></span>
-                            <span>Vo Trung Dung</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link py-1" href="#">
-                            <span class="fa fa-sign-out"></span>
-                            <span>Sign out</span>
-                        </a>
-                    </li>
+                    
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link py-1" href="#">
+                                <span class="fa fa-user"></span>
+                                <span>{{ user.first_name }} {{ user.last_name}} </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link py-1" href="{% url 'logout' %}">
+                                <span class="fa fa-sign-out"></span>
+                                <span>Sign out</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link py-1" href="{% url 'login'%}">
+                                <span class="fa fa-sign-in"></span>
+                                <span>Sign in</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                        
+                    
                 </ul>
-
-                
             </div>
-        </nav>
+        {% comment %} {% else %}
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link py-1" href="{% url 'login'%}?next={{request.path}}">
+                    <span class="fa fa-sign-in"></span>
+                    <span>Sign in</span>
+                </a>
+            </li>
+        </ul>
+            
+        {% endif %} {% endcomment %}
+
+    </nav>
     
     <!--
                     
@@ -189,6 +220,9 @@
                     </li>
     -->
     
+
+
+   
 
     <div class="container-fluid">
         <div class="row">
@@ -324,12 +358,24 @@
 
 
 </body>
-<footer>
-    <span>
-        Copyright 2018 by Dung Vo. All Rights reserved.
-        <br>
-        Email: trungdungsgn@gmail.com
-    </span>
+<footer class="footer d-flex">
+    
+    {% comment %} <div class="row">
+        <div class="col-sm-12 my-auto">
+            <div class="card card-block w-100">Card</div>
+        </div>
+    </div> {% endcomment %}
+
+
+    <div class="mx-auto my-auto d-block">
+        <span class="my-auto">
+            Copyright 2018 by Dung Vo. All rights reserved.
+            <br>
+            Email: trungdungsgn@gmail.com
+        </span>
+    </div>
+
+    
 </footer>
 
 </html>

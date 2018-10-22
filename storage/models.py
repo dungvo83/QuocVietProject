@@ -31,8 +31,8 @@ class Category(models.Model):
     def get_delete_url(self):
         return reverse('category_delete', kwargs={"pk": self.pk})
 
-    def get_items(self):
-        return Item.objects.filter(category=self)[:3]
+    # def get_items(self):
+    #     return Item.objects.filter(category=self)[:3]
 
 
 class Item(models.Model):

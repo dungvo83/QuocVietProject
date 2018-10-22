@@ -19,9 +19,20 @@ from django.conf.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
 
+#Add URL maps to redirect the base URL to our application
+from django.views.generic import RedirectView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('storage/', include('storage.urls')),
+    path('', RedirectView.as_view(url='storage/')),
+
+]
+
+#Add Django site authentication urls (for login, logout, password management)
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+    # path('login', RedirectView.as_view(url='accounts/login/')),
 ]
 
 if settings.DEBUG:

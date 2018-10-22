@@ -7,63 +7,96 @@
 <div id="id_current_active" name="id_categories">
 </div> 
 
-{% if category %}
-    <h3 class="mb-3">CHANGE CATEGORY</h3>
-    <div class="modal fade" id="confirm_delete_{{category.pk}}">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form action="{% url 'category_delete' pk=category.pk %}" method="POST">
-                    {% csrf_token %}
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                            <h4 class="modal-title">Delete Category</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        Are you sure you want to delete the category: {{ form.name.value }}
-                    </div>
-                
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <!--
-                        <a href="{% url 'category_delete' pk=category.pk %}">action1</a>
-                        <a href="{{ category.get_delete_url }}">action2</a>
-                        -->
+<div class="card border-mono">
+    <div class="card-header">
+        {% if category %}
+            <h3 class="m-1">
+                <strong>
+                    CHANGE CATEGORY
+                </strong>
+            </h3>
+            <div class="modal fade" id="confirm_delete_{{category.pk}}">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <form action="{% url 'category_delete' pk=category.pk %}" method="POST">
+                            {% csrf_token %}
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                    <h4 class="modal-title">Delete Category</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                Are you sure you want to delete the category: {{ form.name.value }} ??
+                                <div class="container-fluid">
+                                    <div class="row mt-3">
+                                        <div class="col-0 col-sm-6">
+                                        </div>
+                                        <div class="col-6 col-sm-3">
+                                            <button type="submit" class="btn btn-danger btn-sm btn-block">Yes, delete</button>
+                                        </div>
+                                        <div class="col-6 col-sm-3">
+                                            <button type="button" class="btn btn-primary btn-sm btn-block" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         
-                        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger btn-sm">Yes, delete</button>
+                            <!-- Modal footer -->
+                            {% comment %} <div class="modal-footer">
+                                <!--
+                                <a href="{% url 'category_delete' pk=category.pk %}">action1</a>
+                                <a href="{{ category.get_delete_url }}">action2</a>
+                                -->
+                                
+                                
+                                
+                                
+                            </div> {% endcomment %}
+                        </form>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>    
-{% else %}
-    <h3 class="mb-3">ADD CATEGORY</h3>
-{% endif %}
-    
-    
-
-
-<form method="post" novalidate>
-    {% csrf_token %}
-    
-    {% include './includes/bs4_form.html' with form=form %}
-
-    <div class="bg-dark rounded p-2 mt-4">
-            {% if category %}
-            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"  
-            data-target="#confirm_delete_{{category.pk}}"> DELETE
-            </button>
+                </div>
+            </div>    
         {% else %}
-            <button type="reset" class="btn btn-dark btn-sm" >RESET</button>    
+            <h3 class="m-1">
+                <strong>
+                    ADD CATEGORY
+                </strong>
+            </h3>
         {% endif %}
-            
-        <button type="submit" class="btn btn-primary btn-sm float-right"> SAVE
-        </button>
     </div>
-</form>
+    <div class="card-body">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            
+
+            {% include './includes/bs4_form.html' with form=form %}
+        
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-0 col-sm-6">
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        {% if category %}
+                            <button type="button" class="btn btn-danger btn-sm btn-block" data-toggle="modal"  
+                                data-target="#confirm_delete_{{category.pk}}">DELETE
+                            </button>
+                        {% else %}
+                            <button type="reset" class="btn btn-dark btn-sm btn-block">RESET</button>    
+                        {% endif %} 
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <button type="submit" class="btn btn-primary btn-sm btn-block">SAVE</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
 {% endblock content %}
 
 

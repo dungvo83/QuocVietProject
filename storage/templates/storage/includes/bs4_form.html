@@ -15,7 +15,7 @@
 {% for field in form.visible_fields %}
     <div class="form-group">
         <strong>
-            <label class="mt-2" for="{{ field.id_for_field }}">{{ field.label_tag }}</label>
+            <label class="mt-2 text-mono" for="{{ field.id_for_field }}">{{ field.label_tag }}</label>
         </strong>
         
         {% if form.is_bound %}
@@ -27,7 +27,7 @@
                     </div>
                 {% endfor %}
             {% else %}
-                {% render_field field class="form-control is-valid" %}
+                {% render_field field class="form-control is-valid text-mono" %}
             {% endif %}
         {% else %}
             {% render_field field class="form-control" placeholder=field.help_text %}
@@ -40,3 +40,12 @@
         -->
     </div>
 {% endfor %}
+
+<input id="previous_url" type="hidden" name="previous_url" value="">
+<script>
+    $(document).ready(function() {
+        // get previous_url
+        var referrer =  document.referrer;
+        $("#previous_url").attr('value',referrer)
+    });
+</script>

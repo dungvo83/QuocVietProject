@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    {% comment %} <div class="d-flex">
+            <div class="m-auto">
+                <h2 class="thead-text-mono">
+                    You did not have permission to do that.
+                    <p>Please, come back.</p>
+                    
+                </h2>
+            
+                <button id="back" class="btn btn-mono pl-5 pr-5">
+                    Back
+                </button>
+                    
+            </div>
+    </div> {% endcomment %}
+    
+
+    {% comment %} <div class="contain-fluid bg-secondary">
+        <div class="d-flex"
+                style="height:100vh">
+            <div class="mx-auto my-auto d-block">
+                123
+            </div>
+        </div>
+    </div> {% endcomment %}
+
+
+    {% comment %} <div class="container">
+        <div class="row">
+            <div class="span12">
+            <div class="hero-unit center">
+                <h1>Page Not Found <small><font face="Tahoma" color="red">Error 404</font></small></h1>
+                <br />
+                <p>The page you requested could not be found, either contact your webmaster or try again. Use your browsers <b>Back</b> button to navigate to the page you have prevously come from</p>
+                <p><b>Or you could just press this neat little button:</b></p>
+                <a href="#" class="btn btn-large btn-info"><i class="icon-home icon-white"></i> Take Me Home</a>
+                </div>
+                <br />
+            <div class="thumbnail">
+                <center><h2>Recent Content :</h2></center>
+            </div>
+                <br />
+                <div class="thumbnail span3 center">
+                <h3>Try This...</h3>
+                <p>write about your error page conent here and give some fool a good load of information or not</p>
+                <div class="hero-unit">
+                    <img src="http://placehold.it/100x100"><!--Why Not Put a Picture To Celebrate Your 404-->
+                    <p></p>
+                </div>
+                <a href="#" class="btn btn-danger btn-large"><i class="icon-share icon-white"></i> Take Me There...</a>
+                </div>
+                <div class="thumbnail span3 center"> 
+                <h3>Try This...</h3>
+                <p>write about your error page conent here and give some fool a good load of information or not</p>
+                <div class="hero-unit">
+                    <img src="http://placehold.it/100x100"><!--Why Not Put a Picture To Celebrate Your 404-->
+                    <p></p>
+                </div>
+                <a href="#" class="btn btn-danger btn-large"><i class="icon-share icon-white"></i> Take Me There...</a>
+                </div>
+                    <div class="thumbnail span3 center">
+                <h3>Try This...</h3>
+                <p>write about your error page conent here and give some fool a good load of information or not</p>
+                <div class="hero-unit">
+                    <img src="http://placehold.it/100x100"><!--Why Not Put a Picture To Celebrate Your 404-->
+                    <p></p>
+                </div>
+                <a href="#" class="btn btn-danger btn-large"><i class="icon-share icon-white"></i> Take Me There...</a>
+                </div>
+                    <div class="thumbnail span3 center">
+                <h3>Try This...</h3>
+                <p>write about your error page conent here and give some fool a good load of information or not</p>
+                <div class="hero-unit">
+                    <img src="http://placehold.it/100x100"><!--Why Not Put a Picture To Celebrate Your 404-->
+                    <p></p>
+                </div>
+                <a href="#" class="btn btn-danger btn-large"><i class="icon-share icon-white"></i> Take Me There...</a>
+                </div>
+                <br />
+                <p></p>
+                <!-- By ConnerT HTML & CSS Enthusiast -->  
+            </div>
+        </div>
+    </div> {% endcomment %}
+
+
+    {% comment %} <div class="page-wrap d-flex flex-row align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <span class="display-4 thead-text-mono">Oops..</span>
+                    <span class="badge badge-danger">Error 403</span>
+
+                    <div class="mb-4 lead thead-text-mono">
+                        You did not have permission to do that.
+                    </div>
+                    <button id="back" class="btn btn-mono pl-5 pr-5">
+                        Back
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> {% endcomment %}
+        
+    <div>
+        <p class="display-4">
+            <span class="badge badge-danger">403</span>
+        </p>
+        <p>
+            <span class="h2 tbody-cap-mono">Oops..You did not have permission to do that.</span>
+        </p>
+        <hr>
+        <br>
+        <p class="text-mono">You may want to head back to the previous page.</p>
+
+        <button id="back" class="btn btn-outline-dark pl-5 pr-5">
+                <span class="fa fa-arrow-left"></span> Back
+        </button>
+        
+    </div>
+    
+      
+    
+
+    <script>
+        $('document').ready(function(){
+            $("#back").on("click", function(){
+                parent.history.back();
+                return false;
+            });
+        });
+    </script>
+
+
+{% endblock content %}
+    

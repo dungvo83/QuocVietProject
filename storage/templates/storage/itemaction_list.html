@@ -33,9 +33,9 @@
         <table class="table table-bordered">
             <thead>
                 <tr class="thead-text-mono thead-mono">
+                    <th class="w-15">Date</th>
                     <th class="w-15">Category</th>
                     <th class="w-20">Item</th>
-                    <th class="w-15">Date</th>
                     <th class="w-15 text-right">Price</th>
                     <th class="w-10 text-right">Quantity</th>
                     <th class="w-15 text-right">Total</th>
@@ -45,9 +45,13 @@
             <tbody>
                 {% for itemaction in itemaction_list %}
                     <tr class="tbody-mono">
+                        <td class="w-15">{{itemaction.date}}
+                            <a href="{{ itemaction.get_absolute_url }}" class="float-right">
+                                <span class="text-warning fa fa-pencil"></span>
+                            </a>
+                        </td>
                         <td class="w-15">{{itemaction.item.category}}</td>
                         <td class="w-20">{{itemaction.item}}</td>
-                        <td class="w-15">{{itemaction.date}}</td>
                         <td class="w-15 text-right">{{itemaction.price}}</td>
                         <td class="w-10 text-right">{{itemaction.quantity}}</td>
                         <td class="w-15 text-right">{{itemaction.get_total}}</td>
