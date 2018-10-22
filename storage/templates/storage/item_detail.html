@@ -33,7 +33,11 @@
         
     </div>
 
-    <br>        
+    
+    
+
+
+
     <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-sm-12 col-lg-2 mt-2">
@@ -70,7 +74,7 @@
         </div>
     </div>
 
-    <div class="container-fluid mt-2">
+    {% comment %} <div class="container-fluid mt-2">
         <table id="detailTable" class="table table-bordered">
             <thead class="thead-mono thead-text-mono"> 
                 <tr>
@@ -121,6 +125,48 @@
                 {% endfor %}
             </tbody>
         </table>
+    </div> {% endcomment %}
+    <br>      
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table id="detailTable" class="table table-bordered">
+                <thead>
+                    <tr class="thead-text-mono thead-mono">
+                        <th class="w-15">Date</th>
+                        <th class="w-15">Category</th>
+                        <th class="w-20">Item</th>
+                        <th class="w-15 text-right">Price</th>
+                        <th class="w-10 text-right">Quantity</th>
+                        <th class="w-15 text-right">Total</th>
+                        <th class="w-10 text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for itemaction in item.itemaction_set.all %}
+                        <tr class="tbody-mono">
+                            <td class="w-15">{{itemaction.date}}
+                                <a href="{{ itemaction.get_absolute_url }}" class="float-right">
+                                    <span class="text-warning fa fa-pencil"></span>
+                                </a>
+                            </td>
+                            <td class="w-15">{{itemaction.item.category}}</td>
+                            <td class="w-20">{{itemaction.item}}</td>
+                            <td class="w-15 text-right">{{itemaction.price}}</td>
+                            <td class="w-10 text-right">{{itemaction.quantity}}</td>
+                            <td class="w-15 text-right">{{itemaction.get_total}}</td>
+                            <td class="w-10 text-center">
+                                {% if itemaction.status == 'i' %}
+                                    INPUT
+                                {% else %}
+                                    OUTPUT
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>    
+        </div>
+        
     </div>
 
     <div class="container-fluid">
