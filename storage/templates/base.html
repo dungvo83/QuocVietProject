@@ -17,6 +17,7 @@
 
     <!-- ICON -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    {% comment %} <link rel="stylesheet" href="{% static 'maxcdn/fontawesome/css/all.css' %}"> {% endcomment %}
 
     <!-- Bootstrap CSS -->
     <!--
@@ -42,10 +43,10 @@
     
 
     <!-- Data Table -->
-    <link rel="stylesheet" 
+    {% comment %} <link rel="stylesheet" 
         href="{% static 'DataTables/DataTables-1.10.19/css/dataTables.bootstrap4.min.css' %}">
     <script src="{% static 'DataTables/DataTables-1.10.19/js/jquery.dataTables.min.js' %}"></script>
-    <script src="{% static 'DataTables/DataTables-1.10.19/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'DataTables/DataTables-1.10.19/js/dataTables.bootstrap4.min.js' %}"></script> {% endcomment %}
 
 
     <script src="{% static 'js/MyTableData.js' %}"></script>
@@ -63,9 +64,6 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/account-style.css' %}">
     
-        
-
-
     <script type="text/javascript">
 
         $(document).ready(function(){
@@ -131,14 +129,14 @@
         
 
 
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top navbar-shadow">
+    <nav class="navbar navbar-light navbar-expand-sm fixed-top navbar-shadow">
             <a class="navbar-brand py-1 rounded">QuocVietShop</a>
 
             
         {% comment %} {% if user.is_authenticated %} {% endcomment %}
             <button class="navbar-toggler" type="button" data-toggle="collapse" 
             data-target="#navbarMain" aria-controls="navbarTogglerDemo03" 
-            aria-expanded="false" aria-label="Toggle navigation">
+            aria-expanded="true" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             
@@ -171,7 +169,6 @@
                     </li> {% endcomment %}
                 </ul>
                 <ul class="navbar-nav">
-                    
                     {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link py-1" href="#">
@@ -193,8 +190,6 @@
                             </a>
                         </li>
                     {% endif %}
-                        
-                    
                 </ul>
             </div>
         {% comment %} {% else %}
