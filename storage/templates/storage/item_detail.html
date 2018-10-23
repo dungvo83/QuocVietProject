@@ -127,7 +127,7 @@
         </table>
     </div> {% endcomment %}
     <br>      
-    <div class="container-fluid">
+    {% comment %} <div class="container-fluid">
         <div class="table-responsive">
             <table id="detailTable" class="table table-bordered">
                 <thead>
@@ -166,8 +166,96 @@
                 </tbody>
             </table>    
         </div>
-        
-    </div>
+    </div> {% endcomment %}
+
+    <table class="table table-bordered">
+            <thead>
+                <tr class="d-flex thead-text-mono thead-mono">
+                    <th class="col-6 d-block d-lg-none d-xl-none">Date</th>
+                    <th class="col-6 d-block d-lg-none d-xl-none">Detail</th>
+    
+                    <th class="col-lg-2 d-none d-lg-block">Date</th>
+                    <th class="col-lg-3 d-none d-lg-block">Category</th>
+                    <th class="col-lg-2 d-none d-lg-block text-right">Price</th>
+                    <th class="col-lg-2 d-none d-lg-block text-right">Quantity</th>
+                    <th class="col-lg-2 d-none d-lg-block text-right">Total</th>
+                    <th class="col-lg-1 d-none d-lg-block text-center">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for itemaction in item.itemaction_set.all %}
+                    <tr class="d-flex tbody-mono">
+                        <td class="col-6 d-block d-lg-none d-xl-none">
+                            
+                            
+                            <div class="text-right mb-2">
+                                {% if itemaction.status == "o" %}
+                                    <div class="badge badge-warning">
+                                        out
+                                    </div>
+                                {% else %}
+                                    <div class="badge badge-danger">
+                                        in
+                                    </div>
+                                {% endif %}
+                                <div class="float-left">
+                                    <h6 class="mb-2"><small><strong>{{itemaction.date}}</strong></small></h6>
+                                </div>
+                            </div>
+                            
+                            
+                        
+                            <div class="text-secondary">
+                                <small>Category: </small> {{itemaction.item.category}}
+                            </div>
+                        </td>
+                        <td class="col-6 d-block d-lg-none d-xl-none">
+                            <div class="text-right mb-2">
+                                <a href="{{ itemaction.get_absolute_url }}">
+                                    <div class="badge badge-dark">
+                                        <span class="fa fa-pencil"></span>
+                                    </div>
+                                </a> 
+                                <span class="float-left"><h6 class="mb-2"><small><strong>{{itemaction.item}}</strong></small></h6></span>
+                            </div>
+    
+                             
+                            
+                            
+    
+                            
+                            <small><div class="text-right"><span class="float-left">Price:</span>{{itemaction.price}}</div></small>
+                            <small><div class="text-right"><span class="float-left">Quantity:</span>{{itemaction.quantity}}</div></small>
+                            <hr class="m-0">
+                            <small><div class="text-right"><span class="float-left">Total:</span>{{itemaction.get_total}}</div></small> 
+    
+                        </td>
+                        <td class="col-lg-2 d-none d-lg-block">
+                            <a href="{{ itemaction.get_absolute_url }}" class="float-left">
+                                <div class="badge badge-dark">
+                                    <span class="fa fa-pencil"></span>
+                                </div>
+                            </a>
+                            &nbsp;{{itemaction.date}}</td>
+                        <td class="col-lg-3 d-none d-lg-block">{{itemaction.item.category}}</td>
+                        <td class="col-lg-2 d-none d-lg-block text-right">{{itemaction.price}}</td>
+                        <td class="col-lg-2 d-none d-lg-block text-right">{{itemaction.quantity}}</td>
+                        <td class="col-lg-2 d-none d-lg-block text-right">{{itemaction.get_total}}</td>
+                        <td class="col-lg-1 d-none d-lg-block text-center">
+                            {% if itemaction.status == "o" %}
+                                <div class="badge badge-warning">
+                                    out
+                                </div>
+                            {% else %}
+                                <div class="badge badge-danger">
+                                    in
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
     <div class="container-fluid">
         <ul id="id_pagination" class="pagination pagination-sm justify-content-end">
