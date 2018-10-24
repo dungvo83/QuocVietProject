@@ -9,28 +9,37 @@
 
     <div class="container-fluid">
         <table class="table table-bordered">
-            <thead class="thead-mono" >
+            <thead class="thead-mono">
                 <tr>
-                    <th colspan="2" class="w-100 thead-text-mono">
+                    <th class="thead-text-mono">
                         ITEM
                         <a href="{{ item.get_absolute_url }}" class="float-right">
                             <span class="text-warning fa fa-pencil"></span>
                         </a>
                     </th>
+                    
                 </tr>
             </thead>
             <tbody class="tbody-mono">
                 <tr>
-                    <th class="w-30 theah-text-mono">NAME: </th>
-                    <td class="w-70 tbody-text-mono">{{item.name}}</td>
-                </tr>
-                <tr>
-                    <th class="w-30 theah-text-mono">DESCRIPTION: </th>
-                    <td class="w-70 tbody-text-mono">{{item.description}}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-12 col-lg-3">
+                                {% if item.image %}
+                                    <img src="{{item.image.url}}" alt="{{item.image.url}}" class="img-thumbnail">
+                                {% else %}
+                                    <img src="//placehold.it/512x512" class="img-thumbnail">
+                                {% endif %}
+                            </div>
+                            <div class="col-12 col-lg-9">
+                                <p class="mt-2 mb-1"><strong>{{item.name}}</strong></p>
+                                {{item.description}}
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
-        
     </div>
 
     
@@ -74,121 +83,83 @@
         </div>
     </div>
 
-    {% comment %} <div class="container-fluid mt-2">
+    
+
+    <div class="container-fluid mt-2">
         <table id="detailTable" class="table table-bordered">
-            <thead class="thead-mono thead-text-mono"> 
-                <tr>
-                    {# itemaction: date, quantity, price, status #}
-                    <th class="w-20"> 
-                        DATE
-                    </th>
-                    <th class="w-20 text-right"> 
-                        PRICE
-                    </th>
-                    <th class="w-20 text-right"> 
-                        QUANTITY
-                    </th>
-                    <th class="w-20 text-right"> 
-                        TOTAL
-                    </th>
-                    <th class="w-20 text-center"> 
-                        STATUS
-                    </th>
-                </tr>
-            </thead>
-            
-            <tbody class="tbody-mono">
-                {% for itemaction in item.itemaction_set.all%}
-                    <tr class="tbody-text-mono">
-                        <td class="w-20">
-                            <a href="{% url 'itemaction_update' pk=itemaction.pk %}" class="tbody-cap-mono">
-                                {{itemaction.date}}
-                            </a>
-                        </td>
-                        <td class="w-20 text-right">
-                                {{itemaction.price}}
-                            </td>
-                        <td class="w-20 text-right">
-                            {{itemaction.quantity}}
-                        </td>
-                        <td class="w-20 text-right">
-                            {{itemaction.get_total}}
-                        </td>
-                        <td class="w-20 text-center">
-                            {% if itemaction.status == 'i' %}
-                                INPUT
-                            {% else %}
-                                OUTPUT
-                            {% endif %}                            
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div> {% endcomment %}
-    <br>      
-    {% comment %} <div class="container-fluid">
-        <div class="table-responsive">
-            <table id="detailTable" class="table table-bordered">
                 <thead>
-                    <tr class="thead-text-mono thead-mono">
-                        <th class="w-15">Date</th>
-                        <th class="w-15">Category</th>
-                        <th class="w-20">Item</th>
-                        <th class="w-15 text-right">Price</th>
-                        <th class="w-10 text-right">Quantity</th>
-                        <th class="w-15 text-right">Total</th>
-                        <th class="w-10 text-center">Status</th>
+                    <tr class="d-flex thead-text-mono thead-mono">
+                        <th class="col-6 d-block d-lg-none d-xl-none">Date</th>
+                        <th class="col-6 d-block d-lg-none d-xl-none">Detail</th>
+        
+                        <th class="col-lg-2 d-none d-lg-block">Date</th>
+                        <th class="col-lg-3 d-none d-lg-block">Category</th>
+                        <th class="col-lg-2 d-none d-lg-block text-right">Price</th>
+                        <th class="col-lg-2 d-none d-lg-block text-right">Quantity</th>
+                        <th class="col-lg-2 d-none d-lg-block text-right">Total</th>
+                        <th class="col-lg-1 d-none d-lg-block text-center">Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for itemaction in item.itemaction_set.all %}
-                        <tr class="tbody-mono">
-                            <td class="w-15">{{itemaction.date}}
-                                <a href="{{ itemaction.get_absolute_url }}" class="float-right">
-                                    <span class="text-warning fa fa-pencil"></span>
+                        <tr class="d-flex tbody-mono">
+                            <td class="col-6 d-block d-lg-none d-xl-none">
+                                
+                                
+                                <div class="text-right mb-2">
+                                    {% if itemaction.status == "o" %}
+                                        <div class="badge badge-warning">
+                                            out
+                                        </div>
+                                    {% else %}
+                                        <div class="badge badge-danger">
+                                            in
+                                        </div>
+                                    {% endif %}
+                                    <div class="float-left">
+                                        <h6 class="mb-2"><small><strong>{{itemaction.date}}</strong></small></h6>
+                                    </div>
+                                </div>
+                                
+                                
+                            
+                                <div class="text-secondary">
+                                    <small>Category: </small> {{itemaction.item.category}}
+                                </div>
+                            </td>
+                            <td class="col-6 d-block d-lg-none d-xl-none">
+                                <div class="text-right mb-2">
+                                    <a href="{{ itemaction.get_absolute_url }}">
+                                        <div class="badge badge-dark">
+                                            <span class="fa fa-pencil"></span>
+                                        </div>
+                                    </a> 
+                                    <span class="float-left"><h6 class="mb-2"><small><strong>{{itemaction.item}}</strong></small></h6></span>
+                                </div>
+        
+                                    
+                                
+                                
+        
+                                
+                                <small><div class="text-right"><span class="float-left">Price:</span>{{itemaction.price}}</div></small>
+                                <small><div class="text-right"><span class="float-left">Quantity:</span>{{itemaction.quantity}}</div></small>
+                                <hr class="m-0">
+                                <small><div class="text-right"><span class="float-left">Total:</span>{{itemaction.get_total}}</div></small> 
+        
+                            </td>
+                            <td class="col-lg-2 d-none d-lg-block">
+                                <a href="{{ itemaction.get_absolute_url }}" class="float-left">
+                                    <div class="badge badge-dark">
+                                        <span class="fa fa-pencil"></span>
+                                    </div>
                                 </a>
-                            </td>
-                            <td class="w-15">{{itemaction.item.category}}</td>
-                            <td class="w-20">{{itemaction.item}}</td>
-                            <td class="w-15 text-right">{{itemaction.price}}</td>
-                            <td class="w-10 text-right">{{itemaction.quantity}}</td>
-                            <td class="w-15 text-right">{{itemaction.get_total}}</td>
-                            <td class="w-10 text-center">
-                                {% if itemaction.status == 'i' %}
-                                    INPUT
-                                {% else %}
-                                    OUTPUT
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>    
-        </div>
-    </div> {% endcomment %}
-
-    <table class="table table-bordered">
-            <thead>
-                <tr class="d-flex thead-text-mono thead-mono">
-                    <th class="col-6 d-block d-lg-none d-xl-none">Date</th>
-                    <th class="col-6 d-block d-lg-none d-xl-none">Detail</th>
-    
-                    <th class="col-lg-2 d-none d-lg-block">Date</th>
-                    <th class="col-lg-3 d-none d-lg-block">Category</th>
-                    <th class="col-lg-2 d-none d-lg-block text-right">Price</th>
-                    <th class="col-lg-2 d-none d-lg-block text-right">Quantity</th>
-                    <th class="col-lg-2 d-none d-lg-block text-right">Total</th>
-                    <th class="col-lg-1 d-none d-lg-block text-center">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for itemaction in item.itemaction_set.all %}
-                    <tr class="d-flex tbody-mono">
-                        <td class="col-6 d-block d-lg-none d-xl-none">
-                            
-                            
-                            <div class="text-right mb-2">
+                                &nbsp;{{itemaction.date}}</td>
+                            <td class="col-lg-3 d-none d-lg-block">{{itemaction.item.category}}</td>
+                            <td class="col-lg-2 d-none d-lg-block text-right">{{itemaction.price}}</td>
+                            <td class="col-lg-2 d-none d-lg-block text-right">{{itemaction.quantity}}</td>
+                            <td class="col-lg-2 d-none d-lg-block text-right">{{itemaction.get_total}}</td>
+                            <td class="col-lg-1 d-none d-lg-block text-center">
                                 {% if itemaction.status == "o" %}
                                     <div class="badge badge-warning">
                                         out
@@ -198,64 +169,12 @@
                                         in
                                     </div>
                                 {% endif %}
-                                <div class="float-left">
-                                    <h6 class="mb-2"><small><strong>{{itemaction.date}}</strong></small></h6>
-                                </div>
-                            </div>
-                            
-                            
-                        
-                            <div class="text-secondary">
-                                <small>Category: </small> {{itemaction.item.category}}
-                            </div>
-                        </td>
-                        <td class="col-6 d-block d-lg-none d-xl-none">
-                            <div class="text-right mb-2">
-                                <a href="{{ itemaction.get_absolute_url }}">
-                                    <div class="badge badge-dark">
-                                        <span class="fa fa-pencil"></span>
-                                    </div>
-                                </a> 
-                                <span class="float-left"><h6 class="mb-2"><small><strong>{{itemaction.item}}</strong></small></h6></span>
-                            </div>
-    
-                             
-                            
-                            
-    
-                            
-                            <small><div class="text-right"><span class="float-left">Price:</span>{{itemaction.price}}</div></small>
-                            <small><div class="text-right"><span class="float-left">Quantity:</span>{{itemaction.quantity}}</div></small>
-                            <hr class="m-0">
-                            <small><div class="text-right"><span class="float-left">Total:</span>{{itemaction.get_total}}</div></small> 
-    
-                        </td>
-                        <td class="col-lg-2 d-none d-lg-block">
-                            <a href="{{ itemaction.get_absolute_url }}" class="float-left">
-                                <div class="badge badge-dark">
-                                    <span class="fa fa-pencil"></span>
-                                </div>
-                            </a>
-                            &nbsp;{{itemaction.date}}</td>
-                        <td class="col-lg-3 d-none d-lg-block">{{itemaction.item.category}}</td>
-                        <td class="col-lg-2 d-none d-lg-block text-right">{{itemaction.price}}</td>
-                        <td class="col-lg-2 d-none d-lg-block text-right">{{itemaction.quantity}}</td>
-                        <td class="col-lg-2 d-none d-lg-block text-right">{{itemaction.get_total}}</td>
-                        <td class="col-lg-1 d-none d-lg-block text-center">
-                            {% if itemaction.status == "o" %}
-                                <div class="badge badge-warning">
-                                    out
-                                </div>
-                            {% else %}
-                                <div class="badge badge-danger">
-                                    in
-                                </div>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
         </table>
+    </div>
 
     <div class="container-fluid">
         <ul id="id_pagination" class="pagination pagination-sm justify-content-end">

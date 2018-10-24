@@ -50,12 +50,18 @@
                     <td class="w-40">
                         <div class="row m-0">
                             {% for item in category.item_set.all|slice:":3" %}
-                                <div class="col-6 col-sm-3 p-1"><img src="//placehold.it/512x512" class="card-img"></div>
+                                <div class="col-6 col-sm-3 p-1">
+                                    {% if item.image %}
+                                        <img src="{{item.image.url}}" alt="{{item.image.url}}" class="img-thumbnail">
+                                    {% else %}
+                                        <img src="//placehold.it/512x512" class="img-thumbnail">
+                                    {% endif %}
+                                </div>
                             {% endfor %}
                             
                             {% if category.item_set.all.count > 3 %}
                                 <div class="col-6 col-sm-3 p-1">
-                                    <img src="//placehold.it/512x512?text=..." class="card-img">
+                                    <img src="//placehold.it/512x512?text=..." class="img-thumbnail">
                                 </div>
                             {% endif %}
                         </div>

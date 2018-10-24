@@ -132,7 +132,13 @@
                         <td scope="col" class="w-50">
                             <div class="row">
                                 <div class="col-sm-3 d-none d-lg-block pr-0">
-                                    <img class="img-fluid" src="//placehold.it/512x512" class="card-img-top">
+                                    {% if item.image %}
+                                        <img src="{{item.image.url}}" alt="{{item.image.url}}" class="img-thumbnail">
+                                    {% else %}
+                                        <img src="//placehold.it/512x512" class="img-thumbnail">
+                                    {% endif %}
+                                        
+                                    
                                 </div>
                                 <div class="col-sm-9">
                                     <a href="{% url 'item_detail' pk=item.pk %}" class="tbody-cap-mono">

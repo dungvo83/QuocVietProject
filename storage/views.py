@@ -133,6 +133,7 @@ class ItemDetailView(PermissionRequiredMixin, DetailView):
     permission_required = ('storage.view_item',)
 
     model = Item
+    # print("item: " + model.image)
     template_name = "storage/item_detail.html"
 
 

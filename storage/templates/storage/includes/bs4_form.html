@@ -30,7 +30,32 @@
                 {% render_field field class="form-control is-valid text-mono" %}
             {% endif %}
         {% else %}
-            {% render_field field class="form-control" placeholder=field.help_text %}
+            
+
+            
+            {% comment %} {% if field.field.widget.input_type == "file" %} {% endcomment %}
+            {% comment %} {{field.name}} {% endcomment %}
+            {% if field.name == "image" %}
+
+                <div class="row mb-2">
+                    <div class="col-12 col-sm-3">
+                        {% if item.image %}
+                            <img src="{{item.image.url}}" alt="{{item.image.url}}" class="img-thumbnail">
+                        {% else %}
+                            <img src="//placehold.it/512x512" class="img-thumbnail">
+                        {% endif %}
+                        {% comment %} <img src="//placehold.it/512x512" class="img-fluid img-thumbnail"> {% endcomment %}
+                    </div>
+                    <div class="col-12 col-sm-3">
+                        {% render_field field class="form-control-file" placeholder=field.help_text %}
+                    </div>
+                </div>
+                
+            {% else %}
+                {% render_field field class="form-control" placeholder=field.help_text %}
+            {% endif %}
+                
+            
         {% endif %}
 
         <!--
