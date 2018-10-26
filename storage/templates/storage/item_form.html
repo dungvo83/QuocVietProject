@@ -60,20 +60,15 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             
-            {% comment %} <input type="hidden" name="next" value="{{ request.path }}"> {% endcomment %}
-            {% comment %} <input type="hidden" value="{% if request.REQUEST.next %}
-                                            {{ request.REQUEST.next }}
-                                        {% else %}
-                                            {% if request.META.HTTP_REFERER %}
-                                                {{ request.META.HTTP_REFERER }}
-                                            {% else %}
-                                                /
-                                            {% endif %}
-                                        {% endif %}" 
-                name="next" /> {% endcomment %}
-            
             {% include './includes/bs4_form.html' with form=form %}
-        
+
+
+
+            
+
+
+ 
+
 
             <div class="container-fluid">
                 <div class="row">
@@ -93,11 +88,11 @@
                     </div>
                 </div>
             </div>
-
-            
         </form>
     </div>
 </div>
+
+
 
 {% comment %} <form method="post"
       novalidate>

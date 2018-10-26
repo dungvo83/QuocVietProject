@@ -7,7 +7,10 @@ from django.conf.urls.static import static
 # storage url
 urlpatterns = [
     path('', views.storage_index, name='storage_index'),
-    path('test/', views.test, name='test'),
+    path('test01/', views.test01, name='test01'),
+    path('test02/', views.test02, name='test02'),
+    path('test03/', views.test03, name='test03'),
+    
     path('categories/', views.CategoryList.as_view(), name='categories'),
     path('items/', views.ItemList.as_view(), name='items'),
     path('itemactions/', views.ItemActionList.as_view(), name='itemactions'),

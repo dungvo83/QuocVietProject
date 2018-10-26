@@ -14,8 +14,14 @@ from django.core.exceptions import PermissionDenied
 
 # Create your views here.
 
-def test(request):
-    return render(request, 'test.html', context=None)
+def test01(request):
+    return render(request, 'test01.html', context=None)
+def test02(request):
+    return render(request, 'test02.html', context=None)
+def test03(request):
+    return render(request, 'test03.html', context=None)
+
+
 
 @login_required
 # @permission_required('categorys.view_category')
@@ -169,8 +175,8 @@ class ItemUpdateView(PermissionRequiredMixin, UpdateView):
 
     # go to parent detail
     def get_success_url(self):
-        category_pk = self.object.category.pk
-        return reverse("category_detail", kwargs={"pk": category_pk})
+        item_pk = self.object.pk
+        return reverse("item_detail", kwargs={"pk": item_pk})
 
 
 class ItemDeleteView(PermissionRequiredMixin, DeleteView):

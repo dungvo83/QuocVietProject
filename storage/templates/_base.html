@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+        {% load static %}
+        
+        {% comment %} <link rel="stylesheet" href=" {% static 'css/responstable.css' %} "> {% endcomment %}
+        <link rel="stylesheet" href="{% static 'css/component-style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        {% comment %} <link rel="stylesheet" href="{% static 'css/res-table.css' %}"> {% endcomment %}
+        <link rel="stylesheet" href="{% static 'css/fix-1stCol-responstable.css' %}">
+</head>
+
+{% comment %} <body class="body-mono">
+    
+    <nav class="navbar navbar-light navbar-expand-sm fixed-top navbar-shadow">
+        <a href="{% url 'storage_index' %}" class="navbar-brand py-1 rounded">QuocVietShop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" 
+        data-target="#navbarMain" aria-controls="navbarTogglerDemo03" 
+        aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a id="id_storage_index" class="nav-link py-1" href="{% url 'storage_index' %}">Home</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle py-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Management
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a id="id_categories" class="dropdown-item" href="{% url 'categories' %}">Category</a>
+                        <a id="id_items" class="dropdown-item" href="{% url 'items' %}">Item</a>
+                        <a id="id_itemactions" class="dropdown-item" href="{% url 'itemactions' %}">Item Action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Summary</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-1" href="">Summary</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-1" href="{% url 'test01' %}">test01</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-1" href="{% url 'test02' %}">test02</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-1" href="{% url 'test03' %}">test03</a>
+                </li>
+
+                
+            </ul>
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="#">
+                            <span class="fa fa-user"></span>
+                            <span>{{ user.first_name }} {{ user.last_name}} </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% url 'logout' %}">
+                            <span class="fa fa-sign-out"></span>
+                            <span>Sign out</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="{% url 'login'%}">
+                            <span class="fa fa-sign-in"></span>
+                            <span>Sign in</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+  
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-0 col-lg-1">
+            </div>
+            <div class="col-sm-12 col-lg-10">
+                {% block content %}
+                {% endblock content %}
+            </div>
+            <div class="col-sm-0 col-lg-1">
+            </div>
+        </div>
+    </div>
+
+    
+    {% block test-content %}
+        
+    {% endblock test-content %}
+        
+
+
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center">
+            {% block pagination %}
+                {% if is_paginated %}
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-sm">
+                            <!-- previous page -->
+                            {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{ request.path }}?page={{ page_obj.previous_page_number }}"
+                                    aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                    href="#"
+                                    tabindex="-1">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+        
+                            </li>
+                            {% endif %}
+        
+                            <!-- page range -->
+                            {% for i in page_obj.paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class="page-item active">
+                                        <a class="page-link"
+                                        href="{{ request.path }}?page={{ i }}">
+                                            {{i}}
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                        href="{{ request.path }}?page={{ i }}">
+                                            {{i}}
+                                        </a>
+                                    </li>
+                                {% endif %}   
+                            {% endfor %}
+        
+                            <!-- next page -->
+                            {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{ request.path }}?page={{ page_obj.next_page_number }}"
+                                    aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                    tabindex="-1"
+                                    href="#"
+                                    aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                            {% endif %}
+        
+                        </ul>
+                    </nav>
+                {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <br><br>
+
+    {% block javascript %}
+    {% endblock javascript %}
+</body> {% endcomment %}
+
+<body class="body-mono">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-0 col-lg-1">
+            </div>
+            <div class="col-sm-12 col-lg-10">
+                {% block content %}
+                {% endblock content %}
+            </div>
+            <div class="col-sm-0 col-lg-1">
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+<footer class="footer d-flex">
+    <div class="mx-auto my-auto d-block">
+        <span class="my-auto">
+            Copyright 2018 by Winfred Vo. All rights reserved.
+            <br>
+            Email: winfred.vo@gmail.com
+        </span>
+    </div>
+</footer>
+
+</html>

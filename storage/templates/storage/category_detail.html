@@ -51,27 +51,36 @@
 
     <div class="container-fluid">
         <table class="table table-bordered">
-            <thead class="thead-mono" >
+            <thead class="thead-mono thead-text-mono">
                 <tr>
-                    <th colspan="2" class="w-100 thead-text-mono">
-                        CATEGORY 
+                    <th>
+                        CATEGORY: &nbsp; {{category.name}}
                         <a href="{{ category.get_absolute_url }}" class="float-right">
                             <span class="text-warning fa fa-pencil"></span>
                         </a>
                     </th>
                 </tr>
             </thead>
-            <tbody class="tbody-mono">
-                <tr>
-                    <th class="w-30 theah-text-mono">NAME: </th>
-                    <td class="w-70 tbody-text-mono">{{category.name}}</td>
-                </tr>
-                <tr>
-                    <th class="w-30 theah-text-mono">DESCRIPTION: </th>
-                    <td class="w-70 tbody-text-mono">{{category.description}}</td>
+            <tbody>
+                <tr class="tbody-mono">
+                    <td>
+                        <strong>DESCRIPTION: </strong> <br> 
+                        
+                        {% if category.description %}
+                            {{category.description}}
+                        {% else %}
+                            ...
+                        {% endif %}
+                            
+                        
+                    </td>
                 </tr>
             </tbody>
+
         </table>
+
+
+        
     </div>
 
 
@@ -116,7 +125,17 @@
     </div>
     {########################################################}
     <div class="container-fluid mt-3">
-        <table id="detailTable" class="table table-bordered" data-pagination="true">
+        <table class="fix-1stCol-responstable">
+            <tr class="thead-mono thead-text-mono">
+                <th class="w-50">ITEM</th>
+                <th class="w-50">ACTION</th>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+        <table id="detailTable" class="table table-bordered">
             
             <thead class="thead-mono thead-text-mono">
                 <tr>
@@ -196,6 +215,11 @@
                 {% endfor %}
             </tbody>
         </table>    
+
+
+        
+
+
     </div>
     <br>
     {########################################################}

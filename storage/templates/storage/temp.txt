@@ -1,0 +1,98 @@
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>
+        {% block title %}
+        Home
+        {% endblock title %}
+    </title>
+
+    {% load static %}
+
+    <!-- ICON -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    {% comment %} <link rel="stylesheet" href="{% static 'maxcdn/fontawesome/css/all.css' %}"> {% endcomment %}
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'maxcdn/bootstrap/4.1.3/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/component-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/account-style.css' %}"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/fix-1stCol-responstable.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.4.3/cropper.min.css">
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'maxcdn/jquery/3.3.1/jquery.min.js' %}"></script>
+    <script src="{% static 'maxcdn/popper/1.14.4/popper.js' %}"></script>
+    <script src="{% static 'maxcdn/bootstrap/4.1.3/js/bootstrap.min.js' %}"></script>
+    
+
+    <!-- Data Table -->
+    {% comment %} <link rel="stylesheet" 
+        href="{% static 'DataTables/DataTables-1.10.19/css/dataTables.bootstrap4.min.css' %}">
+    <script src="{% static 'DataTables/DataTables-1.10.19/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'DataTables/DataTables-1.10.19/js/dataTables.bootstrap4.min.js' %}"></script> {% endcomment %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.4.3/cropper.min.js"></script>
+    <script src="{% static 'js/MyTableData.js' %}"></script>
+    
+ 
+    {% comment %} <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            /* remove all old_active */
+            $(".nav").find(".active").removeClass("active");
+
+            /* get name of id_current_active tag div */
+            /* tag div have name = id */
+            var _current_active = $("div").filter("#id_current_active").attr("name");
+
+            /* set active of tag a which have id = id_current_active */
+            $("a[id='" + _current_active + "']").addClass("active");
+            $("a[id='" + _current_active + "']").parents("li").addClass("active");
+
+        });
+/*
+
+    alert($("a[id='" + _current_active + "']").attr("id"));
+
+    if (_current_active == "_id_storage_index") {
+        $("a").filter("#_id_store_index").addClass("active");
+    }
+
+    $("##category").parents("")
+            $(document).find('##category')
+
+            alert( $(document.body).attr('id') );
+
+            $("button").click(function(){
+                alert("btn click");
+            });
+
+            $(".nav-item").click(function(){
+                $(".nav .navbar-nav .li").find(".active").removeClass("active");
+                $(this).addClass('active');
+            });
+
+            $(".dropdown-item").click(function(){
+                alert(".dropdown-item");
+            });
+    
+    $(".navbar .nav-item .nav-link").on("click", function(){
+                alert(".navbar .nav-item .nav-link");
+            });
+     $(".nav .nav-link").on("click", function(){
+                $(".nav").find(".active").removeClass("active");
+                $(this).addClass("active");
+            });
+*/
+           
+    </script> {% endcomment %}
+
+</head>

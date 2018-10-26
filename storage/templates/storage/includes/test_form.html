@@ -1,0 +1,258 @@
+{% load widget_tweaks %}
+
+{% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+{% endfor %}
+
+{% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for error in form.non_field_errors %}
+            {{ error }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% for field in form.visible_fields %}
+    <div class="form-group">
+        <strong>
+            <label class="mt-2 text-mono" for="{{ field.id_for_field }}">{{ field.label_tag }}</label>
+        </strong>
+        
+        {% if form.is_bound %}
+            {% if field.errors %}
+                {% render_field field class="form-control is-invalid" %}
+                {% for error in field.errors %}                
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% render_field field class="form-control is-valid text-mono" %}
+            {% endif %}
+        {% else %}
+            
+
+            
+            {% comment %} {% if field.field.widget.input_type == "file" %} {% endcomment %}
+            {% comment %} {{field.name}} {% endcomment %}
+            {% if field.name == "image" %}
+                <div class="row mb-2">
+                    <div class="col-12 col-sm-3">
+                        {% if item.image %}
+                            <img id="s_image" src="{{item.image.url}}" alt="{{item.image.url}}" class="img-thumbnail" 
+                            style="max-width: 100px; max-height: 100px">
+                        {% else %}
+                            <img id="s_image" src="//placehold.it/512x512" class="img-thumbnail">
+                        {% endif %}
+                        {% comment %} <img src="//placehold.it/512x512" class="img-fluid img-thumbnail"> {% endcomment %}
+                    </div>
+                    <div class="col-12 col-sm-3">
+                        {% render_field field class="form-control-file" placeholder=field.help_text id="id_image" %}
+                    </div>
+                </div>
+            {% else %}
+                {% render_field field class="form-control" placeholder=field.help_text id=field.name %}
+            {% endif %}
+                
+            
+        {% endif %}
+
+        <!--
+        {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+        {% endif %}
+        -->
+    </div>
+{% endfor %}
+
+
+
+<!-- MODAL TO CROP THE IMAGE -->
+<div class="modal fade" id="modalCrop">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {% comment %} <form action="post" enctype="multipart/form-data" id="formUpload"> {% endcomment %}
+                <div class="modal-header">
+                    {% comment %} <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> {% endcomment %}
+                    <h4 class="modal-title">Crop the photo</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="m_image" style="max-width: 100%">
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group pull-left" role="group">
+                        <button type="button" class="btn btn-dark js-zoom-in">in
+                            <span class="glyphicon glyphicon-zoom-in"></span>
+                        </button>
+                        <button type="button" class="btn btn-dark js-zoom-out">out
+                            <span class="glyphicon glyphicon-zoom-out"></span>
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+                    <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+                </div>
+            {% comment %} </form> {% endcomment %}
+        </div>
+    </div>
+</div>
+
+
+<input id="previous_url" type="hidden" name="previous_url" value="">
+
+
+{% block javascript %}
+<script>
+    $(document).ready(function() {
+
+        /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+        $("#id_image").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    /*$("#s_image").attr("src", e.target.result);*/
+                    
+                    $("#m_image").attr("src", e.target.result);
+                    $("#modalCrop").modal("show");
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        
+        
+        /*var $image = $("#m_image");*/
+        var image = document.getElementById('m_image');
+        var cropper;
+
+        $('#modalCrop').on("show.bs.modal", function() {
+            cropper = new Cropper(image, {
+                aspectRatio: 1,
+                crop(event) {
+                    console.log(event.detail.x);
+                    console.log(event.detail.y);
+                    console.log(event.detail.width);
+                    console.log(event.detail.height);
+                    console.log(event.detail.rotate);
+                    console.log(event.detail.scaleX);
+                    console.log(event.detail.scaleY);
+
+                    
+
+                },
+            });
+        }).on("hidden.bs.modal", function() {
+            cropper.destroy();
+        });
+
+        $(".js-crop-and-upload").click(function () {
+
+
+            var cropData = cropper.getData();
+            console.log('cropData: ', cropData);
+            
+            var ex = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+            console.log('export: ', ex);
+            $("#s_image").attr("src", ex);
+
+            $('#name').attr("value", ex);
+            $('#id_image value').attr("value", ex)
+            
+            console.log("files: ", $('#id_image'));
+            
+
+
+
+
+
+            
+            
+            /*
+            $("#id_x").val(cropData["x"]);
+            $("#id_y").val(cropData["y"]);
+            $("#id_height").val(cropData["height"]);
+            $("#id_width").val(cropData["width"]);
+            $("#formUpload").submit();
+            */
+            
+        });
+
+        /*
+        var cropper = new Cropper(image, {
+                viewMode: 1,
+                aspectRatio: 1/1,
+                minCropBoxWidth: 200,
+                minCropBoxHeight: 200,
+                ready: function () {
+                    $image.cropper("setCanvasData", canvasData);
+                    $image.cropper("setCropBoxData", cropBoxData);
+                },
+                
+                crop(event) {
+                    console.log(event.detail.x);
+                    console.log(event.detail.y);
+                    console.log(event.detail.width);
+                    console.log(event.detail.height);
+                    console.log(event.detail.rotate);
+                    console.log(event.detail.scaleX);
+                    console.log(event.detail.scaleY);
+                },
+            });
+        */
+
+        /* SCRIPTS TO HANDLE THE CROPPER BOX */
+        
+        /*
+        var $image = $("#m_image");
+        
+        var cropBoxData;
+        var canvasData;
+        $("#modalCrop").on("shown.bs.modal", function () {
+            $image.cropper({
+                viewMode: 1,
+                aspectRatio: 1/1,
+                minCropBoxWidth: 200,
+                minCropBoxHeight: 200,
+                ready: function () {
+                    $image.cropper("setCanvasData", canvasData);
+                    $image.cropper("setCropBoxData", cropBoxData);
+                }
+            });    
+        }).on("hidden.bs.modal", function () {
+            cropBoxData = $image.cropper("getCropBoxData");
+            canvasData = $image.cropper("getCanvasData");
+            $image.cropper("destroy");
+        });
+
+        $(".js-zoom-in").click(function () {
+            $image.cropper("zoom", 0.1);
+        });
+
+        $(".js-zoom-out").click(function () {
+            $image.cropper("zoom", -0.1);
+        });
+        */
+        
+        /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+        
+        /*
+        $(".js-crop-and-upload").click(function () {
+            var cropData = $image.cropper("getData");
+            $("#id_x").val(cropData["x"]);
+            $("#id_y").val(cropData["y"]);
+            $("#id_height").val(cropData["height"]);
+            $("#id_width").val(cropData["width"]);
+            $("#formUpload").submit();
+        });
+        */
+
+        // get previous_url
+        var referrer =  document.referrer;
+        $("#previous_url").attr('value',referrer)
+    });
+</script>
+    
+{% endblock javascript %}
+    
+

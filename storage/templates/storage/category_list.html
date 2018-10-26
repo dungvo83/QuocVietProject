@@ -26,7 +26,7 @@
 </div>
 {# 123 #}
 
-<div class="container-fluid">
+{% comment %} <div class="container-fluid">
     <table class="table table-bordered">
         <thead class="thead-mono">
             <tr>
@@ -71,8 +71,8 @@
 
         </tbody>
     </table>    
-</div>
-
+</div> {% endcomment %}
+{% comment %} 
 <script>
     $(document).ready(function() {
         $("#searchText").on("keyup",function() {
@@ -86,8 +86,56 @@
 
     });
 
-</script>
+</script> {% endcomment %}
 
+<div class="container-fluid">
+    <table class="fix-1stCol-responstable">
+        <tr  class="thead-mono thead-text-mono">
+            <th class="w-10">#</th>
+            <th class="w-50" data-th="DETAIL">CATEGORY</th>
+            <th class="w-40">ITEM</th>
+        </tr>
+        
+        {% for category in category_list %}
+            <tr class="tbody-mono">
+                <td data-title="id" class="text-center"><span class="order-id">.</span></td>
+                <td data-title="category">
+                    <a href="{% url 'category_detail' pk=category.pk %}" class="tbody-cap-mono">{{category.name}}</a>
+                    <span class="text-truncate-2 tbody-detail-mono">{{category.description}}</span>
+                </td>
+                <td data-title="item">
+                    {% comment %} <div class="container"> {% endcomment %}
+                        <div class="row m-0">
+                            {% for item in category.item_set.all|slice:":3" %}
+                                <div class="col-6 col-sm-3 p-1">
+                                    {% if item.image %}
+                                        <img src="{{item.image.url}}" alt="{{item.image.url}}" class="img-thumbnail">
+                                    {% else %}
+                                        <img src="//placehold.it/512x512" class="img-thumbnail">
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+
+                            {% if category.item_set.all.count > 3 %}
+                                <div class="col-6 col-sm-3 p-1">
+                                    <img src="//placehold.it/512x512?text=..." class="img-thumbnail">
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% comment %} </div> {% endcomment %}
+                </td>
+            </tr>
+            
+        {% endfor %}
+            
+
+        {% comment %} <tr class="tbody-mono">
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr> {% endcomment %}
+    </table>
+</div>
 
 
 
