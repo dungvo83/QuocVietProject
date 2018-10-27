@@ -125,17 +125,140 @@
     </div>
     {########################################################}
     <div class="container-fluid mt-3">
-        <table class="fix-1stCol-responstable">
-            <tr class="thead-mono thead-text-mono">
-                <th class="w-50">ITEM</th>
-                <th class="w-50">ACTION</th>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
-        </table>
+        <table id="detailTable" class="fix-1stCol-responstable">
+            <thead>
+                <tr class="thead-mono thead-text-mono">
+                    <th class="w-10">#</th>
+                    <th class="w-50" data-th="ITEM">ITEM</th>
+                    <th class="w-40">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in category.item_set.all %}
+                    <tr class="tbody-mono">
+                        <td data-title="id" class="text-center"><span class="order-id">.</span></td>
+                        <td data-link="{% url 'item_detail' pk=item.pk %}" data-title="item">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 col-lg-4 p-0">
+                                        {% if item.image %}
+                                            <img src="{{item.image.url}}" alt="{{item.image.url}}" class="img-thumbnail">
+                                        {% else %}
+                                            <img src="//placehold.it/512x512" class="img-thumbnail">
+                                        {% endif %}
+                                        
+                                    </div>
+                                    <div class="col-12 col-lg-8">
+                                        <span class="tbody-cap-mono">{{item.name}}</span>
+                                        {% comment %} <a href="{% url 'item_detail' pk=item.pk %}" class="tbody-cap-mono">{{item.name}}</a> {% endcomment %}
+                                        <span class="text-truncate-3 tbody-detail-mono">{{category.description}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-title="action" style="padding:0px">
+                            {% comment %} <table class="table table-hover table-borderless">
 
-        <table id="detailTable" class="table table-bordered">
+                                    {% for itemaction in item.itemaction_set.all %}
+                                        <tr>
+                                            <td>
+                                                <div class="alert alert-dark p-1">
+                                                    {{itemaction.date}}
+        
+                                                    <div class="float-right">
+                                                        
+                                                        {% if itemaction.status == "o" %}
+                                                            <div class="badge badge-dark">out</div>
+                                                        {% else %}
+                                                            <div class="badge badge-danger">in</div>
+                                                        {% endif %}
+                                                            
+                                                    </div>
+        
+                                                </div>
+                                                
+                                                <div class="text-right m-1">
+                                                    <span class="float-left">Price:</span>
+                                                    {{itemaction.price}}
+                                                </div>
+                                                <div class="text-right m-1">
+                                                    <span class="float-left">Quantity:</span>
+                                                    {{itemaction.quantity}}
+                                                </div>
+                                                <hr class="m-1">
+                                                <div class="text-right m-1">
+                                                    <span class="float-left">Total:</span>
+                                                    {{itemaction.get_total}}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                            </table> {% endcomment %}
+
+
+
+                            <div class="list-group list-group-flush list-group-hover">
+                                {% for itemaction in item.itemaction_set.all|slice:":3" %}
+                                    <div class="list-group-item bg-none border-0 p-1">
+                                        <div class="alert alert-dark p-2">
+                                            {{itemaction.date}}
+                                            <div class="float-right">
+                                                {% if itemaction.status == "o" %}
+                                                    <div class="badge badge-dark">out</div>
+                                                {% else %}
+                                                    <div class="badge badge-danger">in</div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="text-right m-1">
+                                            <span class="float-left">Price:</span>
+                                            {{itemaction.price}}
+                                        </div>
+                                        <div class="text-right m-1">
+                                            <span class="float-left">Quantity:</span>
+                                            {{itemaction.quantity}}
+                                        </div>
+                                        <hr class="m-1">
+                                        <div class="text-right m-1">
+                                            <span class="float-left">Total:</span>
+                                            {{itemaction.get_total}}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                
+                                {% if item.itemaction_set.all.count > 3 %}
+                                    <div class="text-right p-2">
+                                            <a href="#" class="text-success">*more...</a>
+                                    </div>
+                                    
+                                    
+                                    {% comment %} <div class="list-group-item bg-none border-0 p-2">
+                                            <span class="bg-dark">*more...</span>
+                                        <div class="alert alert-dark p-2 m-0">
+                                            more...
+                                        </div>
+                                    </div> {% endcomment %}
+                                {% endif %}
+                                    
+
+
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            
+            
+            
+            
+        </table>
+        <br>
+        <br>
+        <br>
+
+        {% comment %} <table id="detailTable" class="table table-bordered">
             
             <thead class="thead-mono thead-text-mono">
                 <tr>
@@ -214,7 +337,7 @@
                     </tr>
                 {% endfor %}
             </tbody>
-        </table>    
+        </table>     {% endcomment %}
 
 
         
@@ -233,7 +356,18 @@
 
     <script>
         $(document).ready(function() {
-           _tableData("#detailTable", "#searchText", "#id_pagination", "#pageLength"); 
+            _tableData("#detailTable", "#searchText", "#id_pagination", "#pageLength"); 
+
+
+            $("td").on("click", function(){
+                if($(this).attr("data-link")) {
+                    
+
+                    window.location.href = $(this).attr("data-link");
+                }
+                
+            });
+
         });
 
         
