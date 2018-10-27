@@ -108,17 +108,22 @@
                         <div class="row m-0">
                             {% for item in category.item_set.all|slice:":3" %}
                                 <div class="col-6 col-sm-3 p-1">
-                                    {% if item.image %}
-                                        <img src="{{item.image.url}}" alt="{{item.image.url}}" class="img-thumbnail">
-                                    {% else %}
-                                        <img src="//placehold.it/512x512" class="img-thumbnail">
-                                    {% endif %}
+                                    <a href="{% url 'item_detail' pk=item.pk %}">
+                                        {% if item.image %}
+                                            <img src="{{item.image.url}}" alt="{{item.image.url}}" class="img-thumbnail">
+                                        {% else %}
+                                            <img src="//placehold.it/512x512" class="img-thumbnail">
+                                        {% endif %}
+                                    </a>
                                 </div>
                             {% endfor %}
 
                             {% if category.item_set.all.count > 3 %}
                                 <div class="col-6 col-sm-3 p-1">
-                                    <img src="//placehold.it/512x512?text=..." class="img-thumbnail">
+                                    <a href="{% url 'category_detail' pk=category.pk %}">
+                                        <img src="//placehold.it/512x512?text=..." class="img-thumbnail">
+                                    </a>
+                                    
                                 </div>
                             {% endif %}
                         </div>

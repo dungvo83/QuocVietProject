@@ -149,58 +149,17 @@
                                         
                                     </div>
                                     <div class="col-12 col-lg-8">
-                                        <span class="tbody-cap-mono">{{item.name}}</span>
-                                        {% comment %} <a href="{% url 'item_detail' pk=item.pk %}" class="tbody-cap-mono">{{item.name}}</a> {% endcomment %}
+                                        {% comment %} <span class="tbody-cap-mono">{{item.name}}</span> {% endcomment %}
+                                        <a href="{% url 'item_detail' pk=item.pk %}" class="tbody-cap-mono">{{item.name}}</a>
                                         <span class="text-truncate-3 tbody-detail-mono">{{category.description}}</span>
                                     </div>
                                 </div>
                             </div>
                         </td>
                         <td data-title="action" style="padding:0px">
-                            {% comment %} <table class="table table-hover table-borderless">
-
-                                    {% for itemaction in item.itemaction_set.all %}
-                                        <tr>
-                                            <td>
-                                                <div class="alert alert-dark p-1">
-                                                    {{itemaction.date}}
-        
-                                                    <div class="float-right">
-                                                        
-                                                        {% if itemaction.status == "o" %}
-                                                            <div class="badge badge-dark">out</div>
-                                                        {% else %}
-                                                            <div class="badge badge-danger">in</div>
-                                                        {% endif %}
-                                                            
-                                                    </div>
-        
-                                                </div>
-                                                
-                                                <div class="text-right m-1">
-                                                    <span class="float-left">Price:</span>
-                                                    {{itemaction.price}}
-                                                </div>
-                                                <div class="text-right m-1">
-                                                    <span class="float-left">Quantity:</span>
-                                                    {{itemaction.quantity}}
-                                                </div>
-                                                <hr class="m-1">
-                                                <div class="text-right m-1">
-                                                    <span class="float-left">Total:</span>
-                                                    {{itemaction.get_total}}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-
-                            </table> {% endcomment %}
-
-
-
                             <div class="list-group list-group-flush list-group-hover">
                                 {% for itemaction in item.itemaction_set.all|slice:":3" %}
-                                    <div class="list-group-item bg-none border-0 p-1">
+                                    <a href="{% url 'itemaction_update' pk=itemaction.pk %}" class="list-group-item bg-none border-0 p-1 tbody-text-mono">
                                         <div class="alert alert-dark p-2">
                                             {{itemaction.date}}
                                             <div class="float-right">
@@ -225,12 +184,12 @@
                                             <span class="float-left">Total:</span>
                                             {{itemaction.get_total}}
                                         </div>
-                                    </div>
+                                    </a>
                                 {% endfor %}
                                 
                                 {% if item.itemaction_set.all.count > 3 %}
                                     <div class="text-right p-2">
-                                            <a href="#" class="text-success">*more...</a>
+                                            <a href="{% url 'item_detail' pk=item.pk %}" class="text-success">*more...</a>
                                     </div>
                                     
                                     
