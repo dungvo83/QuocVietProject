@@ -189,7 +189,7 @@
                                 
                                 {% if item.itemaction_set.all.count > 3 %}
                                     <div class="text-right p-2">
-                                            <a href="{% url 'item_detail' pk=item.pk %}" class="text-success">*more...</a>
+                                        <a href="{% url 'item_detail' pk=item.pk %}" class="badge text-secondary">*more...</a>
                                     </div>
                                     
                                     
